@@ -1,5 +1,7 @@
 import React from 'react';
 import { ItineraryListEntryView } from './ItineraryListEntryView';
+import { HomeNav } from './Nav';
+
 
 var footer = {
   'position': 'absolute',
@@ -28,12 +30,13 @@ var itineraryContainer = {
 
 export const ItineraryList = (props) => (
 	<div>
-		<div style={itineraryContainer}>
-		{props.itineraryList.map((itinerary) => (
+    <HomeNav/>
+		<div>
+		{props.route.itineraryList.map((itinerary) => (
 			<ItineraryListEntryView itinerary={ itinerary } />
 		))}
 		</div>
-		<div style={footer} onClick={() => props.changePageToRender('addItinerary')}>
+		<div style={footer} >
 			<div style={newItinerary} >+ add new itinerary</div>
 		</div>
 	</div>
