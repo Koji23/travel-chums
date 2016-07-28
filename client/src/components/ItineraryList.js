@@ -28,8 +28,8 @@ export const ItineraryList = (props) => (
 			<ItineraryListEntryView itinerary={ itinerary } />
 		))}
 		</div>
-		<div style={footer}>
-			<div style={newItinerary}>+ add new itinerary</div>
+		<div style={footer} onClick={() => props.changePageToRender('addItinerary')}>
+			<div style={newItinerary} >+ add new itinerary</div>
 		</div>
 	</div>
 )

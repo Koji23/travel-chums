@@ -30,6 +30,10 @@ var newItinerary = {
 	'top': '15px'
 }
 
+// addItinerary (event) {
+// 	event.preventDefault();
+// }
+
 export const AddItinerary = (props) => (
 	<div>
 		<input placeholder="where are you?" style={input1}></input>
