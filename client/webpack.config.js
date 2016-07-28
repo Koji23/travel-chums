@@ -4,6 +4,10 @@ module.exports = {
     path: './',
     filename: 'bundle.js'
   },
+  devserver: {
+    inline: true,
+    port: 8080
+  },
   module: {
     loaders: [
     {
