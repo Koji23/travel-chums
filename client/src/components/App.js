@@ -2,6 +2,8 @@ import React from 'react';
 // import { Authentication } from './Authentication';
 // import { Authenticated } from './Authenticated';
 import { ItineraryList } from './ItineraryList';
+import { Nav } from './Nav';
+import { AddItinerary } from './AddItinerary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,7 +16,10 @@ export default class App extends React.Component {
       demoMode: true,
       userLoggedIn: true,
       username: 'anonymous',
-      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles']
+      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
+      currentRoom: '',
+      header: 'Itinerary List',
+      leftButton: ''
     };
   }
 
@@ -115,13 +120,14 @@ export default class App extends React.Component {
     } else if (this.state.pageToRender === 'itineraryList') {
       childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
     } else if (this.state.pageToRender === 'groupChatRoom') {
-
+      //
     } else if (this.state.pageToRender === 'addItinerary') {
-
+      childToRender = <AddItinerary />
     }
 
     return (
       <div>
+        <Nav header={this.state.header} leftButton={this.state.leftButton}/>
         {childToRender}
       </div>
 
