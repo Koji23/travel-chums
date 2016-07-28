@@ -1,6 +1,7 @@
- import React from 'react';
-import { Authentication } from './Authentication';
-import { Authenticated } from './Authenticated';
+import React from 'react';
+// import { Authentication } from './Authentication';
+// import { Authenticated } from './Authenticated';
+import { ItineraryList } from './ItineraryList';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export default class App extends React.Component {
 
     this.props.mainSocket.on('Authentication', (user) => {
       this.setState({
-        userLoggedIn: user,
+        userLoggedIn: true,
       });
     });
   }
@@ -95,7 +96,7 @@ export default class App extends React.Component {
 
   logOutUser() {
     this.setState({
-      userLoggedIn: false,
+      userLoggedIn: true,
     });
   }
 
@@ -111,8 +112,8 @@ export default class App extends React.Component {
       childToRender= <Authentication
         mainSocket={this.props.mainSocket}
       />
-    } else (this.state.pageToRender === 'itineraryList') {
-      // childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
+    } else if (this.state.pageToRender === 'itineraryList') {
+      childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
     } else if (this.state.pageToRender === 'groupChatRoom') {
 
     } else if (this.state.pageToRender === 'addItinerary') {
