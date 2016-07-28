@@ -6,7 +6,13 @@ import { GroupChatRoom } from './ChatRoom';
 import { AddItinerary } from './AddItinerary';
 import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'react-router';
 
-
+const About = (props) => {
+  return (
+    <div>
+      <h1>About</h1>
+    </div>
+  );
+}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -106,6 +112,8 @@ export default class App extends React.Component {
       <div>
         <Router history={browserHistory}>
           <Route path="/" component={ItineraryList} itineraryList={this.state.itineraryList}></Route>
+          <Route path="additinerary" component={AddItinerary}></Route>
+          <Route path="groupchatroom" component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
         </Router>
       </div>
 
@@ -113,7 +121,6 @@ export default class App extends React.Component {
   }
 }
 
-          // <Route path"/additinerary" component={AddItinerary} ></Route>
 
 
 // <Authenticated

@@ -27,23 +27,22 @@ var leftButton = {
 const HomeNav = (props) => {
     return (
         <nav style={nav}>
-            <Link to="/"></Link>
-            <Link to="addItinerary"></Link>
-            <Link to="groupChat"></Link>
+            <Link to="/">itineraryList</Link>
+            <Link to="addItinerary">addItinerary</Link>
+            <Link to="groupchatroom">groupChatRoom</Link>
         </nav>
     )
 }
 
-const AddItineraryNav = (props) => {
-    return (
-        <nav style={nav}>
-            <div style={header}>{ props.header }</div>
-            <Link to="/"></Link>
-            <Link to="addItinerary"></Link>
-            <Link to="groupChat"></Link>
-        </nav>
-    )
-}
+// const AddItineraryNav = (props) => {
+//     return (
+//         <nav >
+//             <Link to="/">itineraryList</Link>
+//             <Link to="addItinerary">addItinerary</Link>
+//             <Link to="groupChat">groupChatRoom</Link>
+//         </nav>
+//     )
+// }
 
 export {HomeNav}
 
