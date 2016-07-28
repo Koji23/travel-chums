@@ -12,10 +12,10 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {  
-      pageToRender: 'groupChatRoom',
+      pageToRender: 'itineraryList',
       messages: null,
       location: '37.7837-122.4090',
-      userLoggedIn: false,
+      userLoggedIn: true,
       username: 'anonymous',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
       currentRoom: '',
@@ -29,6 +29,7 @@ export default class App extends React.Component {
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
     this.changePageToRender = this.changePageToRender.bind(this);
+    this.setLeftButton = this.setLeftButton.bind(this);
 
     //listens for a messages update from the main server
     this.props.mainSocket.on('updateMessagesState', (location) => {
@@ -92,21 +93,29 @@ export default class App extends React.Component {
     });
   }
 
+  setLeftButton (buttonValue) {
+    this.setState({
+      leftButton: buttonValue
+    });
+  }
+
   render() {
     let childToRender;
     if(!this.state.userLoggedIn) {
       childToRender= <Authentication mainSocket={this.props.mainSocket} />
     } else if (this.state.pageToRender === 'itineraryList') {
-      childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
+      this.setLeftButton('settings');
+      childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender} />
     } else if (this.state.pageToRender === 'groupChatRoom') {
-      childToRender = <GroupChatRoom username={this.state.username} mainSocket={this.props.mainSocket}/>;
+      childToRender = <GroupChatRoom username={this.state.username} mainSocket={this.props.mainSocket} />;
     } else if (this.state.pageToRender === 'addItinerary') {
-      // childToRender = <AddItinerary />;
+      this.setLeftButton('Home');
+      childToRender = <AddItinerary />;
     }
     console.log(GroupChatRoom);
     return (
       <div>
-        <Nav header={this.state.header} leftButton={this.state.leftButton}/>
+        <Nav header={this.state.header} leftButton={this.state.leftButton} changePageToRender={this.changePageToRender} />
         {childToRender}
       </div>
 
