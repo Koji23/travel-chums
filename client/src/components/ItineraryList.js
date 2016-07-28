@@ -7,7 +7,6 @@ var footer = {
   'right': '0',
   'bottom': '0',
   'left': '0',
-  'padding': '1rem',
   'background-color': '#5d5d5d',
   'text-align': 'center'
 }
@@ -19,11 +18,17 @@ var newItinerary = {
 	'top': '15px'
 }
 
+var itineraryContainer = {
+  'height': '530',
+  'display': 'flex',
+  'flex-direction': 'column'
+}
+
 
 
 export const ItineraryList = (props) => (
 	<div>
-		<div>
+		<div style={itineraryContainer}>
 		{props.itineraryList.map((itinerary) => (
 			<ItineraryListEntryView itinerary={ itinerary } />
 		))}

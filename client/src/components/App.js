@@ -12,12 +12,12 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {  
-      pageToRender: 'itineraryList',
+      pageToRender: 'addItinerary',
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
       username: 'anonymous',
-      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
+      itineraryList: ['JUN-1_madrid_to_barcelonaaaaaaaaaa','AUG-27_sanfrancisco_to_losangeles', 'SEP-30_prague_to_berlin'],
       currentRoom: '',
       header: 'Itinerary List',
       leftButton: ''
@@ -104,12 +104,10 @@ export default class App extends React.Component {
     if(!this.state.userLoggedIn) {
       childToRender= <Authentication mainSocket={this.props.mainSocket} />
     } else if (this.state.pageToRender === 'itineraryList') {
-      this.setLeftButton('settings');
       childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender} />
     } else if (this.state.pageToRender === 'groupChatRoom') {
       childToRender = <GroupChatRoom username={this.state.username} mainSocket={this.props.mainSocket} />;
     } else if (this.state.pageToRender === 'addItinerary') {
-      this.setLeftButton('Home');
       childToRender = <AddItinerary />;
     }
     console.log(GroupChatRoom);
