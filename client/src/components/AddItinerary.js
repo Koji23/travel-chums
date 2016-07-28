@@ -1,4 +1,5 @@
 import React from 'react';
+import { HomeNav } from './Nav';
 
 var input1 = {
 	'border': '1px solid black',
@@ -36,6 +37,7 @@ var newItinerary = {
 
 export const AddItinerary = (props) => (
 	<div>
+    <HomeNav/>
 		<input placeholder="where are you?" style={input1}></input>
 		<input placeholder="where are you going?" style={input1}></input>		
 		<input placeholder="when are you going?" style={input1}></input>		
