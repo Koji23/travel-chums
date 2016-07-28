@@ -93,6 +93,7 @@ export class Authentication extends React.Component {
           usernameText={this.state.usernameText}
           passwordText={this.state.passwordText}
         />
+        <button>Sign up with facebook</button>
         {pageToRender}
       </div>
     );

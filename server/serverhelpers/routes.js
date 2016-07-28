@@ -1,9 +1,15 @@
 const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 
+var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin', message: 'Welcome', createdAt:''},
+                 {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:''},
+                 {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:''}];
+
 module.exports = (socket, io) => {
   socket.on('send message', (message) => {
     console.log('!!!!!!!', message);
+    dummyData.push(message);
+    io.emit('get messages for room', dummyData);
   });
   socket.on('send typing status', (bool) => {
     console.log('???????', bool);
@@ -12,9 +18,7 @@ module.exports = (socket, io) => {
   socket.on('get messages for room', (roomname) => {
     console.log(roomname);
     //query database for messages from 'roomname' room
-    io.emit('get messages for room', [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin', message: 'Welcome', createdAt:'', id:'1'},
-                                      {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:'', id:'2'},
-                                      {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:'', id:'3'}]);
+    io.emit('get messages for room', dummyData);
   });
 
 

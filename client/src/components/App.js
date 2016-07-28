@@ -12,7 +12,7 @@ export default class App extends React.Component {
       pageToRender: 'groupChatRoom',
       messages: null,
       location: '37.7837-122.4090',
-      userLoggedIn: true,
+      userLoggedIn: false,
       username: 'anonymous',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles']
     };
@@ -89,9 +89,7 @@ export default class App extends React.Component {
   render() {
     let childToRender;
     if(!this.state.userLoggedIn) {
-      childToRender= <Authentication
-        mainSocket={this.props.mainSocket}
-      />
+      childToRender= <Authentication mainSocket={this.props.mainSocket} />
     } else if (this.state.pageToRender === 'itineraryList') {
       childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
     } else if (this.state.pageToRender === 'groupChatRoom') {
