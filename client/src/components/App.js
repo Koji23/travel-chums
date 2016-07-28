@@ -3,6 +3,9 @@ import { Authentication } from './Authentication';
 // import { Authenticated } from './Authenticated';
 import { ItineraryList } from './ItineraryList';
 import { GroupChatRoom } from './ChatRoom'; 
+import { Nav } from './Nav';
+import { AddItinerary } from './AddItinerary';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,7 +17,10 @@ export default class App extends React.Component {
       location: '37.7837-122.4090',
       userLoggedIn: false,
       username: 'anonymous',
-      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles']
+      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
+      currentRoom: '',
+      header: 'Itinerary List',
+      leftButton: ''
     };
   }
 
@@ -100,6 +106,7 @@ export default class App extends React.Component {
     console.log(GroupChatRoom);
     return (
       <div>
+        <Nav header={this.state.header} leftButton={this.state.leftButton}/>
         {childToRender}
       </div>
 
