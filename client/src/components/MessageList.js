@@ -3,11 +3,11 @@ import { Panel, ListGroup } from 'react-bootstrap';
 import { MessageListEntry } from './MessageListEntry';
 
 export const MessageList = (props) => (
-  <Panel style={{ fontWeight: 'bold' }} header="Chatroom messages">
-    <ListGroup fill>
-      {props.messages.map((message) => (
-        <MessageListEntry message={message} />)
+  <div style={{ fontWeight: 'bold' }} >
+    <ul fill>
+      {props.messages.map((message, index) => (
+        <MessageListEntry message={message} key={index}/>)
       )}
-    </ListGroup>
-  </Panel>
+    </ul>
+  </div>
 );

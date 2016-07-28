@@ -1,17 +1,17 @@
 import React from 'react';
-// import { Authentication } from './Authentication';
+import { Authentication } from './Authentication';
 // import { Authenticated } from './Authenticated';
 import { ItineraryList } from './ItineraryList';
+import { GroupChatRoom } from './ChatRoom'; 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {  
-      pageToRender: 'itineraryList',
+      pageToRender: 'groupChatRoom',
       messages: null,
       location: '37.7837-122.4090',
-      demoMode: true,
       userLoggedIn: true,
       username: 'anonymous',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles']
@@ -23,21 +23,6 @@ export default class App extends React.Component {
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
     this.changePageToRender = this.changePageToRender.bind(this);
-
-    //selects and executes which source to use for setting the location state of application: demo or html5 nav
-    const locationSource = !!this.state.demoMode
-      ? this.updateLocationStateDemo.bind(this)
-      : this.updateLocationState.bind(this);
-    setInterval(locationSource, 500);
-
-    //listens for a location update from the demo server
-    this.props.demoSocket.on('updateLocationStateDemo', (data) => {
-      const position = {};
-      position.coords = {};
-      position.coords.latitude = data.lat;
-      position.coords.longitude = data.lon;
-      this.setPosition(position);
-    });
 
     //listens for a messages update from the main server
     this.props.mainSocket.on('updateMessagesState', (location) => {
@@ -72,11 +57,6 @@ export default class App extends React.Component {
     } else {
       console.log('geolocation not supported');
     }
-  }
-
-  //socket request to demo server to update the state of the location of the app
-  updateLocationStateDemo() {
-    this.props.demoSocket.emit('updateLocationStateDemo', null);
   }
 
   //socket request to the main server to update messages state based on location state
@@ -115,11 +95,11 @@ export default class App extends React.Component {
     } else if (this.state.pageToRender === 'itineraryList') {
       childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
     } else if (this.state.pageToRender === 'groupChatRoom') {
-
+      childToRender = <GroupChatRoom />;
     } else if (this.state.pageToRender === 'addItinerary') {
-
+      // childToRender = <AddItinerary />;
     }
-
+    console.log(GroupChatRoom);
     return (
       <div>
         {childToRender}

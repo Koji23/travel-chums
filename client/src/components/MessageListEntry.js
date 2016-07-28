@@ -3,11 +3,11 @@ import Moment from 'moment';
 import { ListGroupItem } from 'react-bootstrap';
 
 export const MessageListEntry = (props) => (
-  <ListGroupItem>
+  <li>
     {
       props.message.username + ' '
       + props.message.message + ' '
       + Moment(props.message.createdAt).fromNow()
     }
-  </ListGroupItem>
+  </li>
 );
