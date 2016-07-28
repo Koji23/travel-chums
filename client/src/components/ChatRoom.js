@@ -8,7 +8,9 @@ class GroupChatRoom extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      typingStatus: false
+      typingStatus: false,
+      messages: [],
+      roomname: '2016-06-01_madrid_to_barcelona'
     }
     this.debouncedDisableTypingStatus = _.debounce(this.disableTypingStatus, 1000);
   }
@@ -16,9 +18,16 @@ class GroupChatRoom extends React.Component {
   componentDidMount () {
     this.props.mainSocket.on('typing status', (bool) => {
       this.enableTypingStatus();
-      this.debouncedDisableTypingStatus()
+      this.debouncedDisableTypingStatus();
     }); 
+    this.props.mainSocket.on('get messages for room', (messages) => {
+      console.log('23456789', messages);
+      this.setState({
+        messages: messages
+      });
+    });
     
+    this.getMessages();
   }
 
   sendMessage (event) {
@@ -51,12 +60,16 @@ class GroupChatRoom extends React.Component {
     console.log('toggle ', false);
   }
 
+  getMessages () {
+    this.props.mainSocket.emit('get messages for room', this.state.roomname);
+  }
+
   render () {
     let typingStatus = this.state.typingStatus ? <div>Is Typing...</div> : <div></div>;
     return (
       <div>
         <h1>GroupChatRoom</h1>
-        <MessageList username={this.props.username} messages={[{username: 'admin', messages: 'Welcome', createdAt:'', id:'1'},{username: 'anonymous', messages: 'hello', createdAt:'', id:'2'}]} />
+        <MessageList username={this.props.username} messages={this.state.messages} />
         {typingStatus}
         <form>
           <fieldset>

@@ -28793,7 +28793,9 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GroupChatRoom).call(this, props));
 
 	    _this.state = {
-	      typingStatus: false
+	      typingStatus: false,
+	      messages: [],
+	      roomname: '2016-06-01_madrid_to_barcelona'
 	    };
 	    _this.debouncedDisableTypingStatus = _lodash2.default.debounce(_this.disableTypingStatus, 1000);
 	    return _this;
@@ -28808,6 +28810,14 @@
 	        _this2.enableTypingStatus();
 	        _this2.debouncedDisableTypingStatus();
 	      });
+	      this.props.mainSocket.on('get messages for room', function (messages) {
+	        console.log('23456789', messages);
+	        _this2.setState({
+	          messages: messages
+	        });
+	      });
+
+	      this.getMessages();
 	    }
 	  }, {
 	    key: 'sendMessage',
@@ -28844,6 +28854,11 @@
 	      console.log('toggle ', false);
 	    }
 	  }, {
+	    key: 'getMessages',
+	    value: function getMessages() {
+	      this.props.mainSocket.emit('get messages for room', this.state.roomname);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
@@ -28861,7 +28876,7 @@
 	          null,
 	          'GroupChatRoom'
 	        ),
-	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.username, messages: [{ username: 'admin', messages: 'Welcome', createdAt: '', id: '1' }, { username: 'anonymous', messages: 'hello', createdAt: '', id: '2' }] }),
+	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.username, messages: this.state.messages }),
 	        typingStatus,
 	        _react2.default.createElement(
 	          'form',
@@ -48400,8 +48415,12 @@
 	var MessageListEntry = exports.MessageListEntry = function MessageListEntry(props) {
 	  return _react2.default.createElement(
 	    'li',
-	    { style: props.isUser ? { color: 'blue' } : { color: 'green' } },
-	    props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
+	    { style: props.isUser ? { color: 'blue', 'textAlign': 'right', 'paddingRight': '10px' } : { color: 'green' } },
+	    _react2.default.createElement(
+	      'div',
+	      { style: { width: '100%' } },
+	      props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
+	    )
 	  );
 	};
 
