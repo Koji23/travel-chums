@@ -4,7 +4,7 @@
   "description": "Google Maps Crumbs",
   "main": "index.js",
   "scripts": {
-    "start" : "webpack --progress --colors --watch & nodemon server/server.js",
+    "start": "webpack --progress --colors --watch & nodemon server/server.js",
     "server": "nodemon ./server/server.js",
     "client": "cd client && webpack --watch",
     "sample": "nodemon ./mockUsers/server.js",
@@ -37,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "express": "^4.14.0",
     "jquery": "^3.1.0",
+    "material-ui": "^0.15.2",
     "moment": "^2.14.1",
     "mongodb": "^2.2.1",
     "mongoose": "^4.5.4",

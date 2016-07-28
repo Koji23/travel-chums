@@ -2,6 +2,9 @@ const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 
 module.exports = (socket) => {
+  socket.on('send message', (message) => {
+    console.log('!!!!!!!', message);
+  });
   socket.on('updateMessagesState', (location) => {
     chatroomController.updateMessagesState(location, socket);
   });

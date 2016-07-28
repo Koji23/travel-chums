@@ -28695,7 +28695,7 @@
 	      } else if (this.state.pageToRender === 'itineraryList') {
 	        childToRender = _react2.default.createElement(_ItineraryList.ItineraryList, { itineraryList: this.state.itineraryList, changePageToRender: this.changePageToRender });
 	      } else if (this.state.pageToRender === 'groupChatRoom') {
-	        childToRender = _react2.default.createElement(_ChatRoom.GroupChatRoom, null);
+	        childToRender = _react2.default.createElement(_ChatRoom.GroupChatRoom, { username: this.state.username, mainSocket: this.props.mainSocket });
 	      } else if (this.state.pageToRender === 'addItinerary') {
 	        // childToRender = <AddItinerary />;
 	      }
@@ -28764,6 +28764,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(33);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _AddMessage = __webpack_require__(224);
 
 	var _MessageList = __webpack_require__(489);
@@ -28783,11 +28787,27 @@
 	    _classCallCheck(this, GroupChatRoom);
 
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GroupChatRoom).call(this, props));
+	    // console.log(this.props.username)
 	  }
 
 	  _createClass(GroupChatRoom, [{
+	    key: 'sendMessage',
+	    value: function sendMessage(event) {
+	      event.preventDefault();
+	      var messageData = {
+	        username: this.props.username,
+	        message: _reactDom2.default.findDOMNode(this.refs.message).value,
+	        room: '',
+	        createAt: new Date()
+	      };
+	      console.log(this.props.mainSocket);
+	      this.props.mainSocket.emit('send message', messageData);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -28796,7 +28816,25 @@
 	          null,
 	          'GroupChatRoom'
 	        ),
-	        _react2.default.createElement(_MessageList.MessageList, { messages: [{ username: 'anon', messages: 'Welcome', createdAt: '' }] })
+	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.username, messages: [{ username: 'admin', messages: 'Welcome', createdAt: '', id: '1' }, { username: 'anonymous', messages: 'hello', createdAt: '', id: '2' }] }),
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(
+	            'fieldset',
+	            null,
+	            _react2.default.createElement(
+	              'legend',
+	              null,
+	              'Send:'
+	            ),
+	            _react2.default.createElement('textarea', { ref: 'message' }),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement('input', { onClick: function onClick(event) {
+	                return _this2.sendMessage(event);
+	              }, type: 'submit', value: 'Submit' })
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -48273,12 +48311,16 @@
 	var MessageList = exports.MessageList = function MessageList(props) {
 	  return _react2.default.createElement(
 	    'div',
-	    { style: { fontWeight: 'bold' } },
+	    { style: { border: '1px solid black', fontWeight: 'bold' } },
 	    _react2.default.createElement(
 	      'ul',
 	      { fill: true },
 	      props.messages.map(function (message, index) {
-	        return _react2.default.createElement(_MessageListEntry.MessageListEntry, { message: message, key: index });
+	        if (message.username === props.username) {
+	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { message: message, key: index, isUser: true });
+	        } else {
+	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { message: message, key: index, isUser: false });
+	        }
 	      })
 	    )
 	  );
@@ -48310,7 +48352,7 @@
 	var MessageListEntry = exports.MessageListEntry = function MessageListEntry(props) {
 	  return _react2.default.createElement(
 	    'li',
-	    null,
+	    { style: props.isUser ? { color: 'blue' } : { color: 'green' } },
 	    props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
 	  );
 	};

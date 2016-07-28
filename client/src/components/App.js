@@ -95,7 +95,7 @@ export default class App extends React.Component {
     } else if (this.state.pageToRender === 'itineraryList') {
       childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
     } else if (this.state.pageToRender === 'groupChatRoom') {
-      childToRender = <GroupChatRoom />;
+      childToRender = <GroupChatRoom username={this.state.username} mainSocket={this.props.mainSocket}/>;
     } else if (this.state.pageToRender === 'addItinerary') {
       // childToRender = <AddItinerary />;
     }
