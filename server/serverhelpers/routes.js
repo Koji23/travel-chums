@@ -21,4 +21,8 @@ module.exports = (socket) => {
   socket.on('validateUserSignup', (userCredentials) => {
     userController.validateUserSignup(userCredentials.username, userCredentials.password, socket);
   });
+
+  socket.on('typing', (status) => {
+    io.emit('typing', status);
+  })
 };

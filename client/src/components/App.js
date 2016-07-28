@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Authentication } from './Authentication';
 import { Authenticated } from './Authenticated';
 
@@ -6,11 +6,14 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = {  
+      pageToRender: 'itineraryList',
       messages: null,
       location: '37.7837-122.4090',
       demoMode: true,
-      userLoggedIn: false,
+      userLoggedIn: true,
+      username: 'anonymous',
+      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles']
     };
   }
 
@@ -18,6 +21,7 @@ export default class App extends React.Component {
     this.addMessageToChatRoom = this.addMessageToChatRoom.bind(this);
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
+    this.changePageToRender = this.changePageToRender.bind(this);
 
     //selects and executes which source to use for setting the location state of application: demo or html5 nav
     const locationSource = !!this.state.demoMode
@@ -95,29 +99,41 @@ export default class App extends React.Component {
     });
   }
 
-  render() {
-    const loggedIn = (
-      <Authenticated
-        messages={this.state.messages}
-        userLoggedIn={this.state.userLoggedIn}
-        addMessageToChatRoom={this.addMessageToChatRoom}
-        createChatRoom={this.createChatRoom}
-        logOutUser={this.logOutUser}
-      />
-    );
+  changePageToRender (pageToRender) {
+    this.setState({
+      pageToRender: pageToRender
+    });
+  }
 
-    const notLoggedIn = (
-      <Authentication
+  render() {
+    let childToRender;
+    if(!this.state.userLoggedIn) {
+      childToRender= <Authentication
         mainSocket={this.props.mainSocket}
       />
-    );
+    } else (this.state.pageToRender === 'itineraryList') {
+      // childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender}/>
+    } else if (this.state.pageToRender === 'groupChatRoom') {
 
-    let childToRender = !!this.state.userLoggedIn ? loggedIn : notLoggedIn;
+    } else if (this.state.pageToRender === 'addItinerary') {
+
+    }
 
     return (
       <div>
         {childToRender}
       </div>
+
     );
   }
 }
+
+
+
+// <Authenticated
+//   messages={this.state.messages}
+//   userLoggedIn={this.state.userLoggedIn}
+//   addMessageToChatRoom={this.addMessageToChatRoom}
+//   createChatRoom={this.createChatRoom}
+//   logOutUser={this.logOutUser}
+// />
