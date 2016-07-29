@@ -48,9 +48,6 @@ export default class App extends React.Component {
     });
   }
 
-  getChatRooms() {
-    this.props.mainSocket.emit('get chatrooms', {username: this.state.username})
-  }
 
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
   setPosition(position) {
@@ -70,6 +67,11 @@ export default class App extends React.Component {
     } else {
       console.log('geolocation not supported');
     }
+  }
+
+  // get list of chat rooms for that user
+  getChatRooms() {
+    this.props.mainSocket.emit('get chatrooms', {username: this.state.username})
   }
 
   //socket request to the main server to update messages state based on location state

@@ -27,7 +27,10 @@ module.exports = {
   },
 
   getChatRooms: (socket) => {
-    console.log('yay')
+    console.log('username', socket.username);
+    db.UserTest.findOne({where: {username: socket.username}}).then(function(data) {
+      console.log(data);
+    })
   }
 
   // that inputs a {location: [long, lat], message: 'string'} object and pushes string into that token's messages array
