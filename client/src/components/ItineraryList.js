@@ -30,21 +30,21 @@ class ItineraryList extends React.Component {
 
 	constructor (props) {
     super(props);
+		this.getChatRooms();
   };
 
   // get list of chat rooms for that user
-  getChatRooms(username) {
+  getChatRooms() {
     this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
   }
 
-		// this.getChatRooms(this.props.route.username);
-
+	
 	render () {
-		this.getChatRooms();
+		// console.log(this.props.route.itineraryList);
 		return (
 			<div>
 		    <HomeNav/>
-				<div style={itineraryContainer} onClick={(event) => this.getChatRooms(event)}>
+				<div style={itineraryContainer}>
 				{this.props.route.itineraryList.map((itinerary) => (
 					<ItineraryListEntryView itinerary={ itinerary } />
 				))}
