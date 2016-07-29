@@ -58140,13 +58140,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var nav = {
-	    'background-color': '#be39c5',
+	    'backgroundColor': '#de007b',
 	    'height': '100px',
 	    'position': 'relative'
 	};
 
 	var header = {
-	    'text-align': 'center',
+	    'textAlign': 'center',
 	    'position': 'relative',
 	    'font': '2em "Open Sans", sans-serif',
 	    'color': 'white',
@@ -58154,7 +58154,7 @@
 	};
 
 	var leftButton = {
-	    'text-align': 'left',
+	    'textAlign': 'left',
 	    'left': '10px',
 	    'position': 'absolute',
 	    'font': '1.3em "Open Sans", sans-serif',
@@ -63987,22 +63987,60 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MessageList = exports.MessageList = function MessageList(props) {
+	  var bubble = {
+	    position: 'relative',
+	    width: '250px',
+	    height: '120px',
+	    padding: '0px',
+	    background: '#FFFFFF',
+	    border: '#7F8A7F solid 2px'
+	  };
 	  return _react2.default.createElement(
 	    'div',
-	    { style: { border: '1px solid black', fontWeight: 'bold' } },
+	    { style: { border: '1px solid black', fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px' } },
 	    _react2.default.createElement(
 	      'ul',
 	      { fill: true },
 	      props.messages.map(function (message, index) {
 	        if (message.username === props.username) {
-	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { message: message, key: index, isUser: true });
+	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { side: 'R', message: message, key: index, isUser: true });
 	        } else {
-	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { message: message, key: index, isUser: false });
+	          return _react2.default.createElement(_MessageListEntry.MessageListEntry, { side: 'L', message: message, key: index, isUser: false });
 	        }
 	      })
 	    )
 	  );
 	};
+
+	// .bubble:after 
+	// {
+	// content: '';
+	// position: absolute;
+	// border-style: solid;
+	// border-width: 14px 26px 14px 0;
+	// border-color: transparent #FFFFFF;
+	// display: block;
+	// width: 0;
+	// z-index: 1;
+	// margin-top: -14px;
+	// left: -26px;
+	// top: 64%;
+	// }
+
+	// .bubble:before 
+	// {
+	// content: '';
+	// position: absolute;
+	// border-style: solid;
+	// border-width: 15px 27px 15px 0;
+	// border-color: transparent #7F8A7F;
+	// display: block;
+	// width: 0;
+	// z-index: 0;
+	// margin-top: -15px;
+	// left: -29px;
+	// top: 64%;
+	// }
 
 /***/ },
 /* 638 */
@@ -64029,15 +64067,24 @@
 
 	var MessageListEntry = exports.MessageListEntry = function MessageListEntry(props) {
 	  return _react2.default.createElement(
-	    'li',
-	    { style: props.isUser ? { color: 'blue', 'textAlign': 'right', 'paddingRight': '10px' } : { color: 'green' } },
+	    'div',
+	    null,
+	    props.side === "L" ? _react2.default.createElement('img', { className: 'bubbleImageLeft', src: 'http://www.cienciapr.org/sites/cienciapr.org/files/styles/article-page-node/public/erizo-rubio_1.jpg?itok=PIfVGyo2' }) : _react2.default.createElement('div', null),
 	    _react2.default.createElement(
-	      'div',
-	      { style: { width: '100%', color: 'white' } },
-	      props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
+	      'li',
+	      { className: props.side === 'L' ? 'bubbleLeft' : 'bubbleRight' },
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
+	      )
 	    )
 	  );
 	};
+
+	// style={props.isUser ? {color: 'blue', 'textAlign': 'right', 'paddingRight': '10px'} : {color: 'green'}}
+
+	// style={{width:'100%', color:'white'}}
 
 /***/ },
 /* 639 */

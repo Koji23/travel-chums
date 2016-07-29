@@ -2,16 +2,24 @@ import React from 'react';
 import Moment from 'moment';
 import { ListGroupItem } from 'react-bootstrap';
 
-export const MessageListEntry = (props) => (
-  <li style={props.isUser ? {color: 'blue', 'textAlign': 'right', 'paddingRight': '10px'} : {color: 'green'}}>
-    <div style={{width:'100%', color:'white'}}>
-      {
-        props.message.username + ' '
-        + props.message.message + ' '
-        + Moment(props.message.createdAt).fromNow()
-      }
+export const MessageListEntry = (props) => {
+  return (
+    <div>
+      {props.side === "L" ? <img className='bubbleImageLeft' src="http://www.cienciapr.org/sites/cienciapr.org/files/styles/article-page-node/public/erizo-rubio_1.jpg?itok=PIfVGyo2" /> : <div></div>}
+      <li className={props.side === 'L' ? 'bubbleLeft' : 'bubbleRight'}>
+        <div >
+          {
+            props.message.username + ' '
+            + props.message.message + ' '
+            + Moment(props.message.createdAt).fromNow()
+          }
+        </div>
+      </li>
     </div>
-  </li>
-);
+  );
+};
 
 
+// style={props.isUser ? {color: 'blue', 'textAlign': 'right', 'paddingRight': '10px'} : {color: 'green'}}
+
+// style={{width:'100%', color:'white'}}

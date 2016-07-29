@@ -1,0 +1,67 @@
+.bubbleLeft
+{
+display: inline-block;
+list-style: none;
+position: relative;
+width: 50%;
+min-height: 40px;
+padding: 5px;
+background: #FFFFFF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+margin:  0;
+left: 15px;
+}
+
+.bubbleLeft:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 8px 15px 8px 0;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+left: -13px;
+top: 37%;
+}
+
+.bubbleImageLeft {
+  display: inline-block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.bubbleRight
+{
+display: inline-block;
+list-style: none;
+left: 40%;
+position: relative;
+width: 50%;
+min-height: 40px;
+background: #FFFFFF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding: 5px;
+margin: 2%;
+}
+
+.bubbleRight:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 6px 0 6px 15px;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+margin-top: -6px;
+right: -15px;
+top: 50%;
+}
