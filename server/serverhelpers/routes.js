@@ -1,5 +1,3 @@
-const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
 const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 const messagesController = require('../db/messages/messagesController.js');
@@ -9,15 +7,14 @@ var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin',
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:''},
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:''}];
 
-module.exports = (socket, io, express, app) => {
+module.exports = (socket, io) => {
   socket.on('send message', (message) => {
     console.log(message);
-    // console.log('!!!!!!!', message);
-    // dummyData.push(message); // insert into db
     messagesController.createMessage(message);
     io.emit('get messages for room', dummyData); // send back all messages
   });
   socket.on('send typing status', (bool) => {
+    console.log('???????', bool);
     io.emit('typing status', true);
   });
   socket.on('get messages for room', (roomname) => {
@@ -26,6 +23,12 @@ module.exports = (socket, io, express, app) => {
     console.log('testing', testing)
     io.emit('get messages for room', dummyData);
   });
+  socket.on('send itinerary', (roomname) => {
+    chatroomController.createChatRoom(roomname);
+  });
+
+
+
 
 
   socket.on('updateMessagesState', (location) => {
@@ -40,14 +43,13 @@ module.exports = (socket, io, express, app) => {
     chatroomController.addMessageToChatRoom(msgObj.location, msgObj.message, msgObj.username, socket);
   });
 
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+  socket.on('validateUserLogin', (userCredentials) => {
+    userController.validateUserLogin(userCredentials.username, userCredentials.password, socket);
+  });
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function(req, res) {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      res.redirect('/');
-    }
-  );
+  socket.on('validateUserSignup', (userCredentials) => {
+    userController.validateUserSignup(userCredentials.username, userCredentials.password, socket);
+  });
+
+
 };
-
-
