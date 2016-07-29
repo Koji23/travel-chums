@@ -27,7 +27,7 @@ module.exports = (socket, io) => {
     chatroomController.createChatRoom(roomname);
   });
   socket.on('get chatrooms', (username) => {
-    chatroomController.getChatRooms(username);
+    chatroomController.getChatRooms(username, socket);
   })
 
 

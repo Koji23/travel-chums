@@ -26,10 +26,20 @@ module.exports = {
     });
   },
 
-  getChatRooms: (socket) => {
-    console.log('username', socket.username);
-    db.UserTest.findOne({where: {username: socket.username}}).then(function(data) {
-      console.log(data);
+  getChatRooms: (username, socket) => {
+    db.UserTest.findOne({where: {username: username.username}}).then(function(data) {
+      db.UsersRoomsTest.findAll({where: {userId: data.id}}).then(function(data) {
+        var roomIdList = data.map(function(item) {
+          return item.dataValues.roomId;
+        })
+        db.PublicRoomsTest.findAll({where: {id: {$or: roomIdList}}}).then(function(data1) {
+          var roomNames = data1.map(function(item) {
+            return item.dataValues.roomName;
+          })
+          console.log(roomNames);
+          socket.emit('send rooms to front end', roomNames);
+        })
+      })
     })
   }
 

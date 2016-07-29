@@ -21171,7 +21171,7 @@
 	      this.createChatRoom = this.createChatRoom.bind(this);
 	      this.logOutUser = this.logOutUser.bind(this);
 	      this.changePageToRender = this.changePageToRender.bind(this);
-	      this.setLeftButton = this.setLeftButton.bind(this);
+	      // this.getChatRooms = this.getChatRooms.bind(this);
 
 	      //listens for a messages update from the main server
 	      this.props.mainSocket.on('updateMessagesState', function (location) {
@@ -21184,6 +21184,13 @@
 	      this.props.mainSocket.on('Authentication', function (user) {
 	        _this2.setState({
 	          userLoggedIn: true
+	        });
+	      });
+
+	      this.props.mainSocket.on('send rooms to front end', function (rooms) {
+	        console.log(_this2.state.itineraryList);
+	        _this2.setState({
+	          itineraryList: rooms
 	        });
 	      });
 	    }
@@ -21212,14 +21219,6 @@
 	      } else {
 	        console.log('geolocation not supported');
 	      }
-	    }
-
-	    // get list of chat rooms for that user
-
-	  }, {
-	    key: 'getChatRooms',
-	    value: function getChatRooms() {
-	      this.props.mainSocket.emit('get chatrooms', { username: this.state.username });
 	    }
 
 	    //socket request to the main server to update messages state based on location state
@@ -21286,10 +21285,25 @@
 	        _react2.default.createElement(
 	          _reactRouter.Router,
 	          { history: _reactRouter.hashHistory },
-	          _react2.default.createElement(_reactRouter.Route, { path: '/', onEnter: this.requireAuth.bind(this), component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', onEnter: this.requireAuth.bind(this), component: _AddItinerary.AddItinerary, mainSocket: this.props.mainSocket, username: this.state.username }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', onEnter: this.requireAuth.bind(this), component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication, mainSocket: this.props.mainSocket })
+	          _react2.default.createElement(_reactRouter.Route, { path: '/',
+	            onEnter: this.requireAuth.bind(this),
+	            component: _ItineraryList.ItineraryList,
+	            itineraryList: this.state.itineraryList,
+	            username: this.state.username,
+	            mainSocket: this.props.mainSocket }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary',
+	            onEnter: this.requireAuth.bind(this),
+	            component: _AddItinerary.AddItinerary,
+	            mainSocket: this.props.mainSocket,
+	            username: this.state.username }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom',
+	            onEnter: this.requireAuth.bind(this),
+	            component: _ChatRoom.GroupChatRoom,
+	            mainSocket: this.props.mainSocket,
+	            username: this.state.username }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
+	            component: _Authentication.Authentication,
+	            mainSocket: this.props.mainSocket })
 	        )
 	      );
 	    }
@@ -41010,25 +41024,36 @@
 		function ItineraryList(props) {
 			_classCallCheck(this, ItineraryList);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItineraryList).call(this, props));
-
-			_this.state = {
-				itineraryList: ''
-			};
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(ItineraryList).call(this, props));
 		}
 
 		_createClass(ItineraryList, [{
+			key: 'getChatRooms',
+
+
+			// get list of chat rooms for that user
+			value: function getChatRooms(username) {
+				this.props.route.mainSocket.emit('get chatrooms', { username: 'cookieMonster' });
+			}
+
+			// this.getChatRooms(this.props.route.username);
+
+		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
+				this.getChatRooms();
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Nav.HomeNav, null),
 					_react2.default.createElement(
 						'div',
-						{ style: itineraryContainer },
-						props.route.itineraryList.map(function (itinerary) {
+						{ style: itineraryContainer, onClick: function onClick(event) {
+								return _this2.getChatRooms(event);
+							} },
+						this.props.route.itineraryList.map(function (itinerary) {
 							return _react2.default.createElement(_ItineraryListEntryView.ItineraryListEntryView, { itinerary: itinerary });
 						})
 					),

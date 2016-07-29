@@ -27,20 +27,25 @@ var itineraryContainer = {
 }
 
 class ItineraryList extends React.Component {
-	
+
 	constructor (props) {
-		super(props);
-		this.state = {
-			itineraryList: ''
-		}
-	}
+    super(props);
+  };
+
+  // get list of chat rooms for that user
+  getChatRooms(username) {
+    this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
+  }
+
+		// this.getChatRooms(this.props.route.username);
 
 	render () {
+		this.getChatRooms();
 		return (
 			<div>
 		    <HomeNav/>
-				<div style={itineraryContainer}>
-				{props.route.itineraryList.map((itinerary) => (
+				<div style={itineraryContainer} onClick={(event) => this.getChatRooms(event)}>
+				{this.props.route.itineraryList.map((itinerary) => (
 					<ItineraryListEntryView itinerary={ itinerary } />
 				))}
 				</div>
@@ -48,8 +53,9 @@ class ItineraryList extends React.Component {
 					<div style={newItinerary} >+ add new itinerary</div>
 				</div>
 			</div>
-		)
+		);	
 	}
 }
 
 export {ItineraryList};
+
