@@ -68,7 +68,7 @@ class GroupChatRoom extends React.Component {
   }
 
   render () {
-    let typingStatus = this.state.typingStatus ? <div>Is Typing...</div> : <div></div>;
+    let typingStatus = this.state.typingStatus ? <div style={{color:'white'}}>Is Typing...</div> : <div></div>;
     return (
       <div>
         <HomeNav />
@@ -77,9 +77,9 @@ class GroupChatRoom extends React.Component {
         {typingStatus}
         <form>
           <fieldset>
-            <legend>Send:</legend>
+            <legend style={{color:'white'}}>Send:</legend>
             <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>
-            <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" />
+            <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" style={{color:'white'}} />
           </fieldset>
         </form>
       </div>

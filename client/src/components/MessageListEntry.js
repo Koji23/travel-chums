@@ -4,7 +4,7 @@ import { ListGroupItem } from 'react-bootstrap';
 
 export const MessageListEntry = (props) => (
   <li style={props.isUser ? {color: 'blue', 'textAlign': 'right', 'paddingRight': '10px'} : {color: 'green'}}>
-    <div style={{width:'100%'}}>
+    <div style={{width:'100%', color:'white'}}>
       {
         props.message.username + ' '
         + props.message.message + ' '
@@ -13,3 +13,5 @@ export const MessageListEntry = (props) => (
     </div>
   </li>
 );
+
+

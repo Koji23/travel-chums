@@ -114,7 +114,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Router history={browserHistory}>
+        <Router history={hashHistory}>
           <Route path="/"  onEnter={this.requireAuth.bind(this)} component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
           <Route path="additinerary" onEnter={this.requireAuth.bind(this)}  component={AddItinerary}></Route>
           <Route path="groupchatroom" onEnter={this.requireAuth.bind(this)}  component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
