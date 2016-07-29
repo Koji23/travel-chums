@@ -23,9 +23,9 @@ module.exports = {
   	grabMessages: (socket) => {
   		console.log(socket);
   		databaseModels.PublicMessagesTest.findAll({
-  			where: {
-  				roomId: 1
-  			}
+  			// where: {
+  			// 	roomId: 1
+  			// }
   		})
   	}
 };
