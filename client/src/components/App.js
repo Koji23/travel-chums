@@ -48,10 +48,10 @@ export default class App extends React.Component {
     });
 
     this.props.mainSocket.on('send rooms to front end', (rooms) => {
-      console.log(this.state.itineraryList)
       this.setState({
         itineraryList: rooms
       })
+      console.log(this.state.itineraryList)
     })
 
 

@@ -21188,10 +21188,10 @@
 	      });
 
 	      this.props.mainSocket.on('send rooms to front end', function (rooms) {
-	        console.log(_this2.state.itineraryList);
 	        _this2.setState({
 	          itineraryList: rooms
 	        });
+	        console.log(_this2.state.itineraryList);
 	      });
 	    }
 
@@ -41024,7 +41024,10 @@
 		function ItineraryList(props) {
 			_classCallCheck(this, ItineraryList);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(ItineraryList).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItineraryList).call(this, props));
+
+			_this.getChatRooms();
+			return _this;
 		}
 
 		_createClass(ItineraryList, [{
@@ -41032,27 +41035,20 @@
 
 
 			// get list of chat rooms for that user
-			value: function getChatRooms(username) {
+			value: function getChatRooms() {
 				this.props.route.mainSocket.emit('get chatrooms', { username: 'cookieMonster' });
 			}
-
-			// this.getChatRooms(this.props.route.username);
-
 		}, {
 			key: 'render',
 			value: function render() {
-				var _this2 = this;
-
-				this.getChatRooms();
+				// console.log(this.props.route.itineraryList);
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(_Nav.HomeNav, null),
 					_react2.default.createElement(
 						'div',
-						{ style: itineraryContainer, onClick: function onClick(event) {
-								return _this2.getChatRooms(event);
-							} },
+						{ style: itineraryContainer },
 						this.props.route.itineraryList.map(function (itinerary) {
 							return _react2.default.createElement(_ItineraryListEntryView.ItineraryListEntryView, { itinerary: itinerary });
 						})
