@@ -25,7 +25,7 @@ module.exports = (socket, io) => {
     io.emit('typing status', true);
   });
 
-///UPDATE CONTROLLER FOR LISTENER
+///UPDATE CONTROLLER FOR LISTEN
 
   socket.on('get messages for room', (roomname) => {
     messagesController.grabMessages(roomname, socket);
