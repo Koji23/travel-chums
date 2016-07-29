@@ -40,7 +40,7 @@ class GroupChatRoom extends React.Component {
       room: '',
       createAt: new Date()
     }
-    console.log(this.props.route.mainSocket);
+    console.log('!!!!!!!!!', messageData, this.props.route.mainSocket);
     this.props.route.mainSocket.emit('send message', messageData);
   }
 

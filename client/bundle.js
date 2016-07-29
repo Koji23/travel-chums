@@ -21138,6 +21138,8 @@
 	// import { Authenticated } from './Authenticated';
 
 
+	var requireAuth = function requireAuth(nextState, replace, cb) {};
+
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
@@ -21255,13 +21257,6 @@
 	      this.setState({
 	        leftButton: buttonValue
 	      });
-	    }
-	  }, {
-	    key: 'requireAuth',
-	    value: function requireAuth(nextState, replace, cb) {
-	      if (!this.state.userLoggedIn) {
-	        replace('/login');
-	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -63765,7 +63760,7 @@
 	        room: '',
 	        createAt: new Date()
 	      };
-	      console.log(this.props.route.mainSocket);
+	      console.log('!!!!!!!!!', messageData, this.props.route.mainSocket);
 	      this.props.route.mainSocket.emit('send message', messageData);
 	    }
 	  }, {

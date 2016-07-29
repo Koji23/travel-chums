@@ -6,6 +6,10 @@ import { GroupChatRoom } from './ChatRoom';
 import { AddItinerary } from './AddItinerary';
 import {Router, Route, IndexRoute, Link, hashHistory, browserHistory, Redirect} from 'react-router';
 
+var requireAuth = (nextState, replace, cb) => {
+  
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -98,11 +102,7 @@ export default class App extends React.Component {
     });
   }
 
-  requireAuth (nextState, replace, cb) {
-    if(!this.state.userLoggedIn) {
-      replace('/login');
-    }
-  }
+  
 
   render() {
     
