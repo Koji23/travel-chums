@@ -30,6 +30,7 @@ const HomeNav = (props) => {
             <Link to="/">itineraryList</Link>
             <Link to="addItinerary">addItinerary</Link>
             <Link to="groupchatroom">groupChatRoom</Link>
+            <Link to="login">Login</Link>
         </nav>
     )
 }

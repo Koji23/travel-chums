@@ -21138,18 +21138,6 @@
 	// import { Authenticated } from './Authenticated';
 
 
-	var About = function About(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'About'
-	    )
-	  );
-	};
-
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
@@ -21162,7 +21150,7 @@
 	      pageToRender: 'itineraryList',
 	      messages: null,
 	      location: '37.7837-122.4090',
-	      userLoggedIn: true,
+	      userLoggedIn: false,
 	      username: 'anonymous',
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
 	      currentRoom: '',
@@ -21269,6 +21257,13 @@
 	      });
 	    }
 	  }, {
+	    key: 'requireAuth',
+	    value: function requireAuth(nextState, replace, cb) {
+	      if (!this.state.userLoggedIn) {
+	        replace('/login');
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
@@ -21280,7 +21275,8 @@
 	          { history: _reactRouter.browserHistory },
 	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', component: _AddItinerary.AddItinerary }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username })
+	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication })
 	        )
 	      );
 	    }
@@ -58163,6 +58159,11 @@
 	            _reactRouter.Link,
 	            { to: 'groupchatroom' },
 	            'groupChatRoom'
+	        ),
+	        _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: 'login' },
+	            'Login'
 	        )
 	    );
 	};
