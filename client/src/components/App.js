@@ -31,7 +31,7 @@ export default class App extends React.Component {
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
     this.changePageToRender = this.changePageToRender.bind(this);
-    this.setLeftButton = this.setLeftButton.bind(this);
+    // this.getChatRooms = this.getChatRooms.bind(this);
 
     //listens for a messages update from the main server
     this.props.mainSocket.on('updateMessagesState', (location) => {
@@ -46,7 +46,17 @@ export default class App extends React.Component {
         userLoggedIn: true,
       });
     });
+
+    this.props.mainSocket.on('send rooms to front end', (rooms) => {
+      console.log(this.state.itineraryList)
+      this.setState({
+        itineraryList: rooms
+      })
+    })
+
+
   }
+
 
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
   setPosition(position) {
@@ -115,10 +125,25 @@ export default class App extends React.Component {
     return (
       <div>
         <Router history={hashHistory}>
-          <Route path="/"  onEnter={this.requireAuth.bind(this)} component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
-          <Route path="additinerary" onEnter={this.requireAuth.bind(this)} component={AddItinerary} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
-          <Route path="groupchatroom" onEnter={this.requireAuth.bind(this)} component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
-          <Route path="login" component={Authentication} mainSocket={this.props.mainSocket}/>
+          <Route path="/"  
+            onEnter={this.requireAuth.bind(this)}
+            component={ItineraryList} 
+            itineraryList={this.state.itineraryList}
+            username={this.state.username}
+            mainSocket={this.props.mainSocket}></Route>
+          <Route path="additinerary" 
+            onEnter={this.requireAuth.bind(this)} 
+            component={AddItinerary}
+            mainSocket={this.props.mainSocket} 
+            username={this.state.username}></Route>
+          <Route path="groupchatroom" 
+            onEnter={this.requireAuth.bind(this)} 
+            component={GroupChatRoom} 
+            mainSocket={this.props.mainSocket} 
+            username={this.state.username}></Route>
+          <Route path="login" 
+            component={Authentication} 
+            mainSocket={this.props.mainSocket}></Route>
         </Router>
       </div>
 
