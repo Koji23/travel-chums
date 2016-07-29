@@ -24,6 +24,10 @@ module.exports = {
         db.UsersRoomsTest.findOrCreate({where: {roomId: data[0].dataValues.id, userId: data2[0].dataValues.id}})
       })
     });
+  },
+
+  getChatRooms: (socket) => {
+    console.log('yay')
   }
 
   // that inputs a {location: [long, lat], message: 'string'} object and pushes string into that token's messages array

@@ -26,6 +26,9 @@ module.exports = (socket, io) => {
   socket.on('send itinerary', (roomname) => {
     chatroomController.createChatRoom(roomname);
   });
+  socket.on('get chatrooms', (username) => {
+    chatroomController.getChatRooms(username);
+  })
 
 
 

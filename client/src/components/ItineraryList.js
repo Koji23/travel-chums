@@ -26,16 +26,30 @@ var itineraryContainer = {
   'flex-direction': 'column'
 }
 
-export const ItineraryList = (props) => (
-	<div>
-    <HomeNav/>
-		<div style={itineraryContainer}>
-		{props.route.itineraryList.map((itinerary) => (
-			<ItineraryListEntryView itinerary={ itinerary } />
-		))}
-		</div>
-		<div style={footer} >
-			<div style={newItinerary} >+ add new itinerary</div>
-		</div>
-	</div>
-)
+class ItineraryList extends React.Component {
+	
+	constructor (props) {
+		super(props);
+		this.state = {
+			itineraryList: ''
+		}
+	}
+
+	render () {
+		return (
+			<div>
+		    <HomeNav/>
+				<div style={itineraryContainer}>
+				{props.route.itineraryList.map((itinerary) => (
+					<ItineraryListEntryView itinerary={ itinerary } />
+				))}
+				</div>
+				<div style={footer} >
+					<div style={newItinerary} >+ add new itinerary</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+export {ItineraryList};

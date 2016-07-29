@@ -48,6 +48,10 @@ export default class App extends React.Component {
     });
   }
 
+  getChatRooms() {
+    this.props.mainSocket.emit('get chatrooms', {username: this.state.username})
+  }
+
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
   setPosition(position) {
     const latRound = position.coords.latitude.toFixed(3);
