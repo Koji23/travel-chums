@@ -21138,8 +21138,6 @@
 	// import { Authenticated } from './Authenticated';
 
 
-	var requireAuth = function requireAuth(nextState, replace, cb) {};
-
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
@@ -21163,8 +21161,8 @@
 	  }
 
 	  _createClass(App, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      var _this2 = this;
 
 	      this.addMessageToChatRoom = this.addMessageToChatRoom.bind(this);
@@ -21259,6 +21257,16 @@
 	      });
 	    }
 	  }, {
+	    key: 'requireAuth',
+	    value: function requireAuth(nextState, replace) {
+	      if (!this.state.userLoggedIn) {
+	        replace({
+	          pathname: '/login',
+	          state: { nextPathname: nextState.location.pathname }
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
@@ -21268,10 +21276,10 @@
 	        _react2.default.createElement(
 	          _reactRouter.Router,
 	          { history: _reactRouter.browserHistory },
-	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', component: _AddItinerary.AddItinerary }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication })
+	          _react2.default.createElement(_reactRouter.Route, { path: '/', onEnter: this.requireAuth.bind(this), component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', onEnter: this.requireAuth.bind(this), component: _AddItinerary.AddItinerary }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', onEnter: this.requireAuth.bind(this), component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication, mainSocket: this.props.mainSocket })
 	        )
 	      );
 	    }
@@ -21376,12 +21384,12 @@
 	  }, {
 	    key: 'validateUserLogin',
 	    value: function validateUserLogin() {
-	      this.props.mainSocket.emit('validateUserLogin', { username: this.state.usernameText, password: this.state.passwordText });
+	      this.props.route.mainSocket.emit('validateUserLogin', { username: this.state.usernameText, password: this.state.passwordText });
 	    }
 	  }, {
 	    key: 'validateUserSignup',
 	    value: function validateUserSignup() {
-	      this.props.mainSocket.emit('validateUserSignup', { username: this.state.usernameText, password: this.state.passwordText });
+	      this.props.route.mainSocket.emit('validateUserSignup', { username: this.state.usernameText, password: this.state.passwordText });
 	    }
 	  }, {
 	    key: 'render',

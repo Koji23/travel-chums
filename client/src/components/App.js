@@ -6,9 +6,6 @@ import { GroupChatRoom } from './ChatRoom';
 import { AddItinerary } from './AddItinerary';
 import {Router, Route, IndexRoute, Link, hashHistory, browserHistory, Redirect} from 'react-router';
 
-var requireAuth = (nextState, replace, cb) => {
-  
-}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,7 +24,7 @@ export default class App extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.addMessageToChatRoom = this.addMessageToChatRoom.bind(this);
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
@@ -102,17 +99,24 @@ export default class App extends React.Component {
     });
   }
 
-  
+  requireAuth (nextState, replace) {
+    if (!this.state.userLoggedIn) {
+      replace({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      })
+    }
+  }
 
   render() {
     
     return (
       <div>
         <Router history={browserHistory}>
-          <Route path="/"  component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
-          <Route path="additinerary" component={AddItinerary}></Route>
-          <Route path="groupchatroom" component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
-          <Route path="login" component={Authentication} />
+          <Route path="/"  onEnter={this.requireAuth.bind(this)} component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
+          <Route path="additinerary" onEnter={this.requireAuth.bind(this)}  component={AddItinerary}></Route>
+          <Route path="groupchatroom" onEnter={this.requireAuth.bind(this)}  component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
+          <Route path="login" component={Authentication} mainSocket={this.props.mainSocket}/>
         </Router>
       </div>
 
