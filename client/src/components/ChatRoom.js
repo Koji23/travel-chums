@@ -1,3 +1,5 @@
+ /* eslint-disable */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AddMessage } from './AddMessage';
@@ -42,7 +44,7 @@ class GroupChatRoom extends React.Component {
     }
     console.log('!!!!!!!', messageData);
 
-    this.props.route.mainSocket.emit('send message', messageData);
+    this.props.route.mainSocket.emit('send message', messageData, this.state.roomname);
   }
 
   sendTypingStatus () {
