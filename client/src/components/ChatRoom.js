@@ -37,10 +37,10 @@ class GroupChatRoom extends React.Component {
     let messageData = {
       username: this.props.route.username,
       message: ReactDOM.findDOMNode(this.refs.message).value,
-      room: '',
+      room: 'default',
       createAt: new Date()
     }
-    console.log(this.props.route.mainSocket);
+    console.log('!!!!!!!', messageData);
     this.props.route.mainSocket.emit('send message', messageData);
   }
 

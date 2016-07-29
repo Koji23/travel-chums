@@ -23,9 +23,9 @@ export default class App extends React.Component {
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
-      username: 'anonymous',
+      username: 'ronaldMcDonald',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-      currentRoom: '',
+      room: 'JTs Fun Emporium',
       header: 'Itinerary List',
       leftButton: ''
     };

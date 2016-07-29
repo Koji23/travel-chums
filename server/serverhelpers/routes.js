@@ -1,5 +1,7 @@
 const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
+const messagesController = require('../db/messages/messagesController.js');
+const sequelize = require('../db/config.js');
 
 var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin', message: 'Welcome', createdAt:''},
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:''},
@@ -7,9 +9,11 @@ var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin',
 
 module.exports = (socket, io) => {
   socket.on('send message', (message) => {
-    console.log('!!!!!!!', message);
-    dummyData.push(message);
-    io.emit('get messages for room', dummyData);
+    console.log(message);
+    // console.log('!!!!!!!', message);
+    // dummyData.push(message); // insert into db
+    messagesController.createMessage(message);
+    io.emit('get messages for room', dummyData); // send back all messages
   });
   socket.on('send typing status', (bool) => {
     console.log('???????', bool);
@@ -17,7 +21,8 @@ module.exports = (socket, io) => {
   });
   socket.on('get messages for room', (roomname) => {
     console.log(roomname);
-    //query database for messages from 'roomname' room
+    var testing = messagesController.grabMessages();
+    console.log('testing', testing)
     io.emit('get messages for room', dummyData);
   });
 

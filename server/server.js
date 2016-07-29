@@ -4,8 +4,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 // db is defined in config.js and passed in as module.exports.connect;
-const db = require('./db/config.js');
-db.connect();
+// const db = require('./db/config.js');
+// db.connect();
 
 // Invoke middleware function on app to 'use' all middleware functions.
 const middleware = require('./serverhelpers/middleware.js');
