@@ -26,12 +26,10 @@ var itineraryContainer = {
   'flex-direction': 'column'
 }
 
-
-
 export const ItineraryList = (props) => (
 	<div>
     <HomeNav/>
-		<div>
+		<div style={itineraryContainer}>
 		{props.route.itineraryList.map((itinerary) => (
 			<ItineraryListEntryView itinerary={ itinerary } />
 		))}

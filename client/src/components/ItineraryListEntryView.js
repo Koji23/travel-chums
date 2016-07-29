@@ -7,8 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 var itineraryItem = {
-	'height': '80px',  
-	'position': 'relative',
+  'height': '80px',  
+  'position': 'relative',
   'border-bottom-width': '1px',
   'border-bottom-style': 'solid',
   'background-color': 'rgba(255, 255, 255, 0.22)',
@@ -40,11 +40,11 @@ var itineraryDetails = {
 
 export const ItineraryListEntryView = (props) => (
     <div style={itineraryItem}>
-  		<span style={itineraryDate}>
-  			{ props.itinerary.split('_').slice(0, 1) }
-  		</span>
-  		<span style={itineraryDetails}>
-  			{ props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
-  		</span>
-  	</div>
+      <span style={itineraryDate}>
+        { props.itinerary.split('_').slice(0, 1) }
+      </span>
+      <span style={itineraryDetails}>
+        { props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
+      </span>
+    </div>
 )

@@ -21138,17 +21138,7 @@
 	// import { Authenticated } from './Authenticated';
 
 
-	var About = function About(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'About'
-	    )
-	  );
-	};
+	var requireAuth = function requireAuth(nextState, replace, cb) {};
 
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -21163,9 +21153,9 @@
 	      messages: null,
 	      location: '37.7837-122.4090',
 	      userLoggedIn: true,
-	      username: 'anonymous',
+	      username: 'ronaldMcDonald',
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-	      currentRoom: '',
+	      room: 'JTs Fun Emporium',
 	      header: 'Itinerary List',
 	      leftButton: ''
 	    };
@@ -21280,7 +21270,8 @@
 	          { history: _reactRouter.browserHistory },
 	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', component: _AddItinerary.AddItinerary }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username })
+	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication })
 	        )
 	      );
 	    }
@@ -58163,6 +58154,11 @@
 	            _reactRouter.Link,
 	            { to: 'groupchatroom' },
 	            'groupChatRoom'
+	        ),
+	        _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: 'login' },
+	            'Login'
 	        )
 	    );
 	};
@@ -63761,10 +63757,11 @@
 	      var messageData = {
 	        username: this.props.route.username,
 	        message: _reactDom2.default.findDOMNode(this.refs.message).value,
-	        room: '',
+	        room: 'default',
 	        createAt: new Date()
 	      };
-	      console.log(this.props.route.mainSocket);
+	      console.log('!!!!!!!', messageData);
+
 	      this.props.route.mainSocket.emit('send message', messageData);
 	    }
 	  }, {

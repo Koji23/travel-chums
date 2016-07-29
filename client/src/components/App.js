@@ -4,14 +4,10 @@ import { Authentication } from './Authentication';
 import { ItineraryList } from './ItineraryList';
 import { GroupChatRoom } from './ChatRoom'; 
 import { AddItinerary } from './AddItinerary';
-import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, Link, hashHistory, browserHistory, Redirect} from 'react-router';
 
-const About = (props) => {
-  return (
-    <div>
-      <h1>About</h1>
-    </div>
-  );
+var requireAuth = (nextState, replace, cb) => {
+  
 }
 
 export default class App extends React.Component {
@@ -23,9 +19,9 @@ export default class App extends React.Component {
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
-      username: 'anonymous',
-      itineraryList: ['JUN-1_madrid_to_barcelonaaaaaaaaaa','AUG-27_sanfrancisco_to_losangeles', 'SEP-30_prague_to_berlin'],
-      currentRoom: '',
+      username: 'ronaldMcDonald',
+      itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
+      room: 'JTs Fun Emporium',
       header: 'Itinerary List',
       leftButton: ''
     };
@@ -106,14 +102,17 @@ export default class App extends React.Component {
     });
   }
 
+  
+
   render() {
 
     return (
       <div>
         <Router history={browserHistory}>
-          <Route path="/" component={ItineraryList} itineraryList={this.state.itineraryList}></Route>
+          <Route path="/"  component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
           <Route path="additinerary" component={AddItinerary}></Route>
           <Route path="groupchatroom" component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
+          <Route path="login" component={Authentication} />
         </Router>
       </div>
 
