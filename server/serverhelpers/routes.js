@@ -1,3 +1,5 @@
+ /* eslint-disable */
+
 const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 const messagesController = require('../db/messages/messagesController.js');
@@ -5,24 +7,32 @@ const sequelize = require('../db/config.js');
 
 var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin', message: 'Welcome', createdAt:''},
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:''},
-                 {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:''}];
+                 {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:''},
+                 {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghostyyy', message: 'boohooo', createdAt:''}];
 
 module.exports = (socket, io) => {
-  socket.on('send message', (message) => {
-    console.log(message);
+
+/// COMPLETE 
+
+  socket.on('send message', (message, roomname) => {
     messagesController.createMessage(message);
     io.emit('get messages for room', dummyData); // send back all messages
   });
+
+/// COMPLETE
+
   socket.on('send typing status', (bool) => {
-    console.log('???????', bool);
     io.emit('typing status', true);
   });
+
+///UPDATE CONTROLLER FOR LISTENER
+
   socket.on('get messages for room', (roomname) => {
-    console.log(roomname);
-    var testing = messagesController.grabMessages();
-    console.log('testing', testing)
-    io.emit('get messages for room', dummyData);
+    messagesController.grabMessages(roomname, socket);
   });
+
+/// TYING IN TO FRONT END
+
   socket.on('send itinerary', (roomname) => {
     chatroomController.createChatRoom(roomname);
   });
@@ -39,9 +49,9 @@ module.exports = (socket, io) => {
     chatroomController.createChatRoom(location, socket);
   });
 
-  socket.on('addMessageToChatRoom', (msgObj) => {
-    chatroomController.addMessageToChatRoom(msgObj.location, msgObj.message, msgObj.username, socket);
-  });
+  // socket.on('addMessageToChatRoom', (msgObj) => {
+  //   chatroomController.addMessageToChatRoom(msgObj.location, msgObj.message, msgObj.username, socket);
+  // });
 
   socket.on('validateUserLogin', (userCredentials) => {
     userController.validateUserLogin(userCredentials.username, userCredentials.password, socket);
