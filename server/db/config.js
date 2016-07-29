@@ -37,34 +37,16 @@ sequelize
 
 
 
-// var sequelize = new Sequelize('travelapp_db', 'keystone', 'password', {
-//   host: 'ta.cmrtcj07hrzy.us-west-1.rds.amazonaws.com',
-//   dialect: 'mysql',
-
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     idle: 10000
-//   },
-// });
-
-// sequelize
-//   .authenticate()
-//   .then(function(err) {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(function (err) {
-//     console.log('Unable to connect to the database:', err);
-//   });
-
-
 /// Testing Users Model
 
   var UserTest = sequelize.define('userTest', {
+    facebookId: {
+      type: Sequelize.STRING
+    },
     username: {
       type: Sequelize.STRING
     },
-    password: {
+    displayName: {
       type: Sequelize.STRING
     }
   });

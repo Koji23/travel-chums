@@ -1,5 +1,8 @@
+ /* eslint-disable */
+
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const userController = require('./db/user/userController.js');
 
 passport.serializeUser(function(user, done) {
   console.log('serializeUser: ' + user.id);
@@ -35,33 +38,10 @@ passport.use(new FacebookStrategy(
   function(accessToken, refreshToken, profile, cb) {
     console.log('accessToken: ', accessToken);
     console.log('profile ', profile);
-    // console.log('refreshToken: ', refreshToken);
 
-    // const id = profile.id;
-    // const name = profile.displayName;
-    // const photos = profile.photos[0].value; 
-    // DATABASE.findOrCreate({where: {id????: id, name: name, photos: photos}}).spread(function(user, created){
-    // 	console.log(user.get({plain: true}));
-    // })
-
-  //   process.nextTick(function(){
-  //     db.query("SELECT * FROM users WHERE facebook_id = ?", [profile.id], function(err, user){
-  //       if (err){
-  //         return cd(err);
-  //       }
-  //       else if (!user){
-  //         var id = profile.id;
-  //         var name = profile.name;
-  //         var email = profile.email;
-  //         var provider = "facebook";
-  //         var facebook = profile._json;
-  //         db.query("INSERT INTO users (id, name, email, provider, token) VALUES (?, ?, ?, ?, ?)", [id, name, email, provider, facebook] function(err){
-            
-  //         });
-  //       } else {
-  //         return cd(err, user);
-  //       }
-  //     });
-  //   });
+    const id = profile.id;
+    const name = profile.displayName;
+    const photos = profile.photos[0].value; 
+    userController.createNewUser(null, id, name);
   }
 ));
