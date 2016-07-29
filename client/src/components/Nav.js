@@ -2,13 +2,13 @@ import React from 'react';
 import {Link} from 'react-router';
 
 var nav = {
-    'background-color': '#be39c5',
+    'backgroundColor': '#de007b',
     'height': '100px',
     'position': 'relative'
 }
 
 var header = {
-  'text-align': 'center',
+  'textAlign': 'center',
   'position': 'relative',
   'font': '2em "Open Sans", sans-serif',
   'color': 'white',
@@ -16,7 +16,7 @@ var header = {
 }
 
 var leftButton = {
-    'text-align': 'left',
+    'textAlign': 'left',
     'left': '10px',
     'position': 'absolute',
   'font': '1.3em "Open Sans", sans-serif',
