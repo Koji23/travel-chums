@@ -21415,18 +21415,24 @@
 	            ' Authentication '
 	          )
 	        ),
-	        _react2.default.createElement(_UserEntry.UserEntry, {
-	          userChange: this.handleUserTextChange,
-	          passwordChange: this.handlePasswordTextChange,
-	          usernameText: this.state.usernameText,
-	          passwordText: this.state.passwordText
-	        }),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'Sign in with facebook'
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'button',
 	          null,
-	          'Sign up with facebook'
-	        ),
-	        pageToRender
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/auth/facebook' },
+	            _react2.default.createElement('img', { src: 'http://i.stack.imgur.com/Vk9SO.png' })
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -72009,7 +72015,7 @@
 	 */
 
 	exports.Manager = __webpack_require__(564);
-	exports.Socket = __webpack_require__(591);
+	exports.Socket = __webpack_require__(592);
 
 
 /***/ },
@@ -74328,14 +74334,14 @@
 	 */
 
 	var eio = __webpack_require__(565);
-	var Socket = __webpack_require__(591);
-	var Emitter = __webpack_require__(592);
+	var Socket = __webpack_require__(592);
+	var Emitter = __webpack_require__(593);
 	var parser = __webpack_require__(557);
-	var on = __webpack_require__(594);
-	var bind = __webpack_require__(595);
+	var on = __webpack_require__(595);
+	var bind = __webpack_require__(596);
 	var debug = __webpack_require__(554)('socket.io-client:manager');
-	var indexOf = __webpack_require__(589);
-	var Backoff = __webpack_require__(598);
+	var indexOf = __webpack_require__(590);
+	var Backoff = __webpack_require__(599);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -74914,13 +74920,13 @@
 	 */
 
 	var transports = __webpack_require__(568);
-	var Emitter = __webpack_require__(561);
+	var Emitter = __webpack_require__(583);
 	var debug = __webpack_require__(554)('engine.io-client:socket');
-	var index = __webpack_require__(589);
+	var index = __webpack_require__(590);
 	var parser = __webpack_require__(574);
 	var parseuri = __webpack_require__(553);
-	var parsejson = __webpack_require__(590);
-	var parseqs = __webpack_require__(583);
+	var parsejson = __webpack_require__(591);
+	var parseqs = __webpack_require__(584);
 
 	/**
 	 * Module exports.
@@ -75650,8 +75656,8 @@
 
 	var XMLHttpRequest = __webpack_require__(569);
 	var XHR = __webpack_require__(571);
-	var JSONP = __webpack_require__(586);
-	var websocket = __webpack_require__(587);
+	var JSONP = __webpack_require__(587);
+	var websocket = __webpack_require__(588);
 
 	/**
 	 * Export transports.
@@ -75775,8 +75781,8 @@
 
 	var XMLHttpRequest = __webpack_require__(569);
 	var Polling = __webpack_require__(572);
-	var Emitter = __webpack_require__(561);
-	var inherit = __webpack_require__(584);
+	var Emitter = __webpack_require__(583);
+	var inherit = __webpack_require__(585);
 	var debug = __webpack_require__(554)('engine.io-client:polling-xhr');
 
 	/**
@@ -76193,10 +76199,10 @@
 	 */
 
 	var Transport = __webpack_require__(573);
-	var parseqs = __webpack_require__(583);
+	var parseqs = __webpack_require__(584);
 	var parser = __webpack_require__(574);
-	var inherit = __webpack_require__(584);
-	var yeast = __webpack_require__(585);
+	var inherit = __webpack_require__(585);
+	var yeast = __webpack_require__(586);
 	var debug = __webpack_require__(554)('engine.io-client:polling');
 
 	/**
@@ -76446,7 +76452,7 @@
 	 */
 
 	var parser = __webpack_require__(574);
-	var Emitter = __webpack_require__(561);
+	var Emitter = __webpack_require__(583);
 
 	/**
 	 * Module exports.
@@ -77788,6 +77794,176 @@
 /* 583 */
 /***/ function(module, exports) {
 
+	
+	/**
+	 * Expose `Emitter`.
+	 */
+
+	module.exports = Emitter;
+
+	/**
+	 * Initialize a new `Emitter`.
+	 *
+	 * @api public
+	 */
+
+	function Emitter(obj) {
+	  if (obj) return mixin(obj);
+	};
+
+	/**
+	 * Mixin the emitter properties.
+	 *
+	 * @param {Object} obj
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function mixin(obj) {
+	  for (var key in Emitter.prototype) {
+	    obj[key] = Emitter.prototype[key];
+	  }
+	  return obj;
+	}
+
+	/**
+	 * Listen on the given `event` with `fn`.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.on =
+	Emitter.prototype.addEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+	  (this._callbacks[event] = this._callbacks[event] || [])
+	    .push(fn);
+	  return this;
+	};
+
+	/**
+	 * Adds an `event` listener that will be invoked a single
+	 * time then automatically removed.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.once = function(event, fn){
+	  var self = this;
+	  this._callbacks = this._callbacks || {};
+
+	  function on() {
+	    self.off(event, on);
+	    fn.apply(this, arguments);
+	  }
+
+	  on.fn = fn;
+	  this.on(event, on);
+	  return this;
+	};
+
+	/**
+	 * Remove the given callback for `event` or all
+	 * registered callbacks.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.off =
+	Emitter.prototype.removeListener =
+	Emitter.prototype.removeAllListeners =
+	Emitter.prototype.removeEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+
+	  // all
+	  if (0 == arguments.length) {
+	    this._callbacks = {};
+	    return this;
+	  }
+
+	  // specific event
+	  var callbacks = this._callbacks[event];
+	  if (!callbacks) return this;
+
+	  // remove all handlers
+	  if (1 == arguments.length) {
+	    delete this._callbacks[event];
+	    return this;
+	  }
+
+	  // remove specific handler
+	  var cb;
+	  for (var i = 0; i < callbacks.length; i++) {
+	    cb = callbacks[i];
+	    if (cb === fn || cb.fn === fn) {
+	      callbacks.splice(i, 1);
+	      break;
+	    }
+	  }
+	  return this;
+	};
+
+	/**
+	 * Emit `event` with the given args.
+	 *
+	 * @param {String} event
+	 * @param {Mixed} ...
+	 * @return {Emitter}
+	 */
+
+	Emitter.prototype.emit = function(event){
+	  this._callbacks = this._callbacks || {};
+	  var args = [].slice.call(arguments, 1)
+	    , callbacks = this._callbacks[event];
+
+	  if (callbacks) {
+	    callbacks = callbacks.slice(0);
+	    for (var i = 0, len = callbacks.length; i < len; ++i) {
+	      callbacks[i].apply(this, args);
+	    }
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Return array of callbacks for `event`.
+	 *
+	 * @param {String} event
+	 * @return {Array}
+	 * @api public
+	 */
+
+	Emitter.prototype.listeners = function(event){
+	  this._callbacks = this._callbacks || {};
+	  return this._callbacks[event] || [];
+	};
+
+	/**
+	 * Check if this emitter has `event` handlers.
+	 *
+	 * @param {String} event
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	Emitter.prototype.hasListeners = function(event){
+	  return !! this.listeners(event).length;
+	};
+
+
+/***/ },
+/* 584 */
+/***/ function(module, exports) {
+
 	/**
 	 * Compiles a querystring
 	 * Returns string representation of the object
@@ -77828,7 +78004,7 @@
 
 
 /***/ },
-/* 584 */
+/* 585 */
 /***/ function(module, exports) {
 
 	
@@ -77840,7 +78016,7 @@
 	};
 
 /***/ },
-/* 585 */
+/* 586 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -77914,7 +78090,7 @@
 
 
 /***/ },
-/* 586 */
+/* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -77923,7 +78099,7 @@
 	 */
 
 	var Polling = __webpack_require__(572);
-	var inherit = __webpack_require__(584);
+	var inherit = __webpack_require__(585);
 
 	/**
 	 * Module exports.
@@ -78159,7 +78335,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 587 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -78168,9 +78344,9 @@
 
 	var Transport = __webpack_require__(573);
 	var parser = __webpack_require__(574);
-	var parseqs = __webpack_require__(583);
-	var inherit = __webpack_require__(584);
-	var yeast = __webpack_require__(585);
+	var parseqs = __webpack_require__(584);
+	var inherit = __webpack_require__(585);
+	var yeast = __webpack_require__(586);
 	var debug = __webpack_require__(554)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
@@ -78183,7 +78359,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(588);
+	    WebSocket = __webpack_require__(589);
 	  } catch (e) { }
 	}
 
@@ -78454,13 +78630,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 588 */
+/* 589 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 589 */
+/* 590 */
 /***/ function(module, exports) {
 
 	
@@ -78475,7 +78651,7 @@
 	};
 
 /***/ },
-/* 590 */
+/* 591 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -78513,7 +78689,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 591 */
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -78522,12 +78698,12 @@
 	 */
 
 	var parser = __webpack_require__(557);
-	var Emitter = __webpack_require__(592);
-	var toArray = __webpack_require__(593);
-	var on = __webpack_require__(594);
-	var bind = __webpack_require__(595);
+	var Emitter = __webpack_require__(593);
+	var toArray = __webpack_require__(594);
+	var on = __webpack_require__(595);
+	var bind = __webpack_require__(596);
 	var debug = __webpack_require__(554)('socket.io-client:socket');
-	var hasBin = __webpack_require__(596);
+	var hasBin = __webpack_require__(597);
 
 	/**
 	 * Module exports.
@@ -78931,7 +79107,7 @@
 
 
 /***/ },
-/* 592 */
+/* 593 */
 /***/ function(module, exports) {
 
 	
@@ -79098,7 +79274,7 @@
 
 
 /***/ },
-/* 593 */
+/* 594 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -79117,7 +79293,7 @@
 
 
 /***/ },
-/* 594 */
+/* 595 */
 /***/ function(module, exports) {
 
 	
@@ -79147,7 +79323,7 @@
 
 
 /***/ },
-/* 595 */
+/* 596 */
 /***/ function(module, exports) {
 
 	/**
@@ -79176,7 +79352,7 @@
 
 
 /***/ },
-/* 596 */
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -79184,7 +79360,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(597);
+	var isArray = __webpack_require__(598);
 
 	/**
 	 * Module exports.
@@ -79242,7 +79418,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 597 */
+/* 598 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -79251,7 +79427,7 @@
 
 
 /***/ },
-/* 598 */
+/* 599 */
 /***/ function(module, exports) {
 
 	

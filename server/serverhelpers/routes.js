@@ -1,3 +1,5 @@
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 
@@ -5,7 +7,7 @@ var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin',
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'anonymous', message: 'hello', createdAt:''},
                  {roomname: '2016-06-01_madrid_to_barcelona', username: 'ghost', message: 'boo', createdAt:''}];
 
-module.exports = (socket, io) => {
+module.exports = (socket, io, express, app) => {
   socket.on('send message', (message) => {
     console.log('!!!!!!!', message);
     dummyData.push(message);
@@ -22,8 +24,6 @@ module.exports = (socket, io) => {
   });
 
 
-
-
   socket.on('updateMessagesState', (location) => {
     chatroomController.updateMessagesState(location, socket);
   });
@@ -36,13 +36,13 @@ module.exports = (socket, io) => {
     chatroomController.addMessageToChatRoom(msgObj.location, msgObj.message, msgObj.username, socket);
   });
 
-  socket.on('validateUserLogin', (userCredentials) => {
-    userController.validateUserLogin(userCredentials.username, userCredentials.password, socket);
-  });
+  app.get('/auth/facebook', passport.authenticate('facebook'));
 
-  socket.on('validateUserSignup', (userCredentials) => {
-    userController.validateUserSignup(userCredentials.username, userCredentials.password, socket);
-  });
-
-
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
 };
+
+

@@ -87,15 +87,16 @@ export class Authentication extends React.Component {
           <h1> Crumbs </h1>
           <p> Authentication </p>
         </Jumbotron>
-        <UserEntry
-          userChange={this.handleUserTextChange}
-          passwordChange={this.handlePasswordTextChange}
-          usernameText={this.state.usernameText}
-          passwordText={this.state.passwordText}
-        />
-        <button>Sign up with facebook</button>
-        {pageToRender}
+        <h4><b>Sign in with facebook</b></h4>
+        
+        <button>
+          <a href="/auth/facebook">
+            <img src="http://i.stack.imgur.com/Vk9SO.png"/> 
+          </a>
+        </button>
       </div>
     );
   }
 }
+
+
