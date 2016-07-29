@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { HomeNav } from './Nav';
 
 var input1 = {
@@ -35,14 +36,37 @@ var newItinerary = {
 // 	event.preventDefault();
 // }
 
-export const AddItinerary = (props) => (
-	<div>
-    <HomeNav/>
-		<input placeholder="where are you?" style={input1}></input>
-		<input placeholder="where are you going?" style={input1}></input>		
-		<input placeholder="when are you going?" style={input1}></input>		
-		<div style={footer}>
-			<div style={newItinerary}>+ submit new itinerary</div>
-		</div>
-	</div>
-)
+class AddItinerary extends React.Component {
+
+	constructor (props) {
+		super(props);
+		this.state = {
+			itinerary: ''
+		}
+	}
+
+	sendItinerary (event) {
+		event.preventDefault();
+		let itineraryData = {
+			itinerary: ReactDOM.findDOMNode(this.refs.message).value
+		}
+	}
+
+	render () {
+		return (
+			<div>test</div>
+		);
+	}
+}
+
+export {AddItinerary};
+
+			// <div>
+		 //    <HomeNav/>
+			// 	<textarea ref="startCity" style={input1}/>
+			// 	<textarea ref="endCity" style={input1}/>		
+			// 	<textarea ref= style={input1}/>
+			// 	<div style={footer} onClick={(event) => this.sendItinerary(event)}>
+			// 		<div style={newItinerary}>+ submit new itinerary</div>
+			// 	</div>
+			// </div>

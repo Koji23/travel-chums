@@ -12,7 +12,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {  
-      pageToRender: 'itineraryList',
+      pageToRender: 'addItinerary',
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
@@ -109,7 +109,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <Router history={browserHistory}>
