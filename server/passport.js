@@ -38,10 +38,9 @@ passport.use(new FacebookStrategy(
   function(accessToken, refreshToken, profile, cb) {
     console.log('accessToken: ', accessToken);
     console.log('profile ', profile);
-
     const id = profile.id;
     const name = profile.displayName;
-    const photos = profile.photos[0].value; 
+    const photos = profile.photos[0].value;
     userController.createNewUser(null, id, name);
   }
 ));

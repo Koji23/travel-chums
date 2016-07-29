@@ -88,7 +88,6 @@ export class Authentication extends React.Component {
           <p> Authentication </p>
         </Jumbotron>
         <h4><b>Sign in with facebook</b></h4>
-        
         <button>
           <a href="/auth/facebook">
             <img src="http://i.stack.imgur.com/Vk9SO.png"/> 
