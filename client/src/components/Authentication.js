@@ -65,21 +65,21 @@ export class Authentication extends React.Component {
       border: '1px solid black',
     };
 
-    const login = (
-      <Login
-        validateUserLogin={this.validateUserLogin}
-        signUp={this.handleClick}
-      />
-    );
+    // const login = (
+    //   <Login
+    //     validateUserLogin={this.validateUserLogin}
+    //     signUp={this.handleClick}
+    //   />
+    // );
 
-    const signup = (
-      <SignUp
-        validateUserSignup={this.validateUserSignup}
-        logIn={this.handleClick}
-      />
-    );
+    // const signup = (
+    //   <SignUp
+    //     validateUserSignup={this.validateUserSignup}
+    //     logIn={this.handleClick}
+    //   />
+    // );
 
-    const pageToRender = !!this.state.login ? login : signup;
+    // const pageToRender = !!this.state.login ? login : signup;
 
     return (
       <div style={authStyle}>
@@ -87,15 +87,16 @@ export class Authentication extends React.Component {
           <h1> Crumbs </h1>
           <p> Authentication </p>
         </Jumbotron>
-        <UserEntry
-          userChange={this.handleUserTextChange}
-          passwordChange={this.handlePasswordTextChange}
-          usernameText={this.state.usernameText}
-          passwordText={this.state.passwordText}
-        />
-        <button>Sign up with facebook</button>
-        {pageToRender}
+        <h4><b>Sign in with facebook</b></h4>
+        
+        <button>
+          <a href="/auth/facebook">
+            <img src="http://i.stack.imgur.com/Vk9SO.png"/> 
+          </a>
+        </button>
       </div>
     );
   }
 }
+
+

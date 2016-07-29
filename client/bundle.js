@@ -21408,17 +21408,21 @@
 	        border: '1px solid black'
 	      };
 
-	      var login = _react2.default.createElement(_Login.Login, {
-	        validateUserLogin: this.validateUserLogin,
-	        signUp: this.handleClick
-	      });
+	      // const login = (
+	      //   <Login
+	      //     validateUserLogin={this.validateUserLogin}
+	      //     signUp={this.handleClick}
+	      //   />
+	      // );
 
-	      var signup = _react2.default.createElement(_SignUp.SignUp, {
-	        validateUserSignup: this.validateUserSignup,
-	        logIn: this.handleClick
-	      });
+	      // const signup = (
+	      //   <SignUp
+	      //     validateUserSignup={this.validateUserSignup}
+	      //     logIn={this.handleClick}
+	      //   />
+	      // );
 
-	      var pageToRender = !!this.state.login ? login : signup;
+	      // const pageToRender = !!this.state.login ? login : signup;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -21437,18 +21441,24 @@
 	            ' Authentication '
 	          )
 	        ),
-	        _react2.default.createElement(_UserEntry.UserEntry, {
-	          userChange: this.handleUserTextChange,
-	          passwordChange: this.handlePasswordTextChange,
-	          usernameText: this.state.usernameText,
-	          passwordText: this.state.passwordText
-	        }),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          _react2.default.createElement(
+	            'b',
+	            null,
+	            'Sign in with facebook'
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'button',
 	          null,
-	          'Sign up with facebook'
-	        ),
-	        pageToRender
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/auth/facebook' },
+	            _react2.default.createElement('img', { src: 'http://i.stack.imgur.com/Vk9SO.png' })
+	          )
+	        )
 	      );
 	    }
 	  }]);
