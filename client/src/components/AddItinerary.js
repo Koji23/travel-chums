@@ -70,3 +70,4 @@ export {AddItinerary};
 			// 		<div style={newItinerary}>+ submit new itinerary</div>
 			// 	</div>
 			// </div>
+
