@@ -95,7 +95,6 @@ export default class App extends React.Component {
     });
   }
 
-<<<<<<< HEAD
   setLeftButton (buttonValue) {
     this.setState({
       leftButton: buttonValue

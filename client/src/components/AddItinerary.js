@@ -48,25 +48,31 @@ class AddItinerary extends React.Component {
 	sendItinerary (event) {
 		event.preventDefault();
 		let itineraryData = {
-			itinerary: ReactDOM.findDOMNode(this.refs.message).value
+			itinerary: 
+			ReactDOM.findDOMNode(this.refs.date).value
+			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value
+			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value
 		}
+		console.log(itineraryData)
+		this.props.route.mainSocket.emit('send itinerary', itineraryData);
 	}
 
 	render () {
 		return (
-			<div>test</div>
+			<div>
+		    <HomeNav/>
+				<textarea ref="startCity" style={input1}/>
+				<textarea ref="endCity" style={input1}/>		
+				<textarea ref="date" style={input1}/>
+				<div style={footer} onClick={(event) => this.sendItinerary(event)}>
+					<div style={newItinerary}>+ submit new itinerary</div>
+				</div>
+			</div>
+			
 		);
 	}
 }
 
 export {AddItinerary};
 
-			// <div>
-		 //    <HomeNav/>
-			// 	<textarea ref="startCity" style={input1}/>
-			// 	<textarea ref="endCity" style={input1}/>		
-			// 	<textarea ref= style={input1}/>
-			// 	<div style={footer} onClick={(event) => this.sendItinerary(event)}>
-			// 		<div style={newItinerary}>+ submit new itinerary</div>
-			// 	</div>
-			// </div>
+				

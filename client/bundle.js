@@ -21128,6 +21128,8 @@
 
 	var _reactRouter = __webpack_require__(576);
 
+	var _Nav = __webpack_require__(575);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -80990,16 +80992,34 @@
 			value: function sendItinerary(event) {
 				event.preventDefault();
 				var itineraryData = {
-					itinerary: _reactDom2.default.findDOMNode(this.refs.message).value
+					itinerary: _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value
 				};
+				console.log(itineraryData);
+				this.props.route.mainSocket.emit('send itinerary', itineraryData);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				return _react2.default.createElement(
 					'div',
 					null,
-					'test'
+					_react2.default.createElement(_Nav.HomeNav, null),
+					_react2.default.createElement('textarea', { ref: 'startCity', style: input1 }),
+					_react2.default.createElement('textarea', { ref: 'endCity', style: input1 }),
+					_react2.default.createElement('textarea', { ref: 'date', style: input1 }),
+					_react2.default.createElement(
+						'div',
+						{ style: footer, onClick: function onClick(event) {
+								return _this2.sendItinerary(event);
+							} },
+						_react2.default.createElement(
+							'div',
+							{ style: newItinerary },
+							'+ submit new itinerary'
+						)
+					)
 				);
 			}
 		}]);
@@ -81008,16 +81028,6 @@
 	}(_react2.default.Component);
 
 	exports.AddItinerary = AddItinerary;
-
-	// <div>
-	//    <HomeNav/>
-	// 	<textarea ref="startCity" style={input1}/>
-	// 	<textarea ref="endCity" style={input1}/>		
-	// 	<textarea ref= style={input1}/>
-	// 	<div style={footer} onClick={(event) => this.sendItinerary(event)}>
-	// 		<div style={newItinerary}>+ submit new itinerary</div>
-	// 	</div>
-	// </div>
 
 /***/ },
 /* 644 */
