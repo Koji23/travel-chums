@@ -53,8 +53,8 @@ class AddItinerary extends React.Component {
 			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value
 			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value
 		}
-		console.log(itineraryData)
-		this.props.route.mainSocket.emit('send itinerary', itineraryData);
+		console.log(this.props.route.mainSocket)
+		this.props.route.mainSocket.emit('send itinerary', {itinerary: '2016-07-09_jeremysplayhouse_to_neverland', username: this.props.route.username});
 	}
 
 	render () {

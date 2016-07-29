@@ -116,7 +116,8 @@ sequelize
 
 exports.PublicMessagesTest = PublicMessagesTest;
 exports.UserTest = UserTest;
-exports.publicRoomsTest = PublicRoomsTest;
+exports.PublicRoomsTest = PublicRoomsTest;
+exports.UsersRoomsTest = UsersRoomsTest;
 
 
 

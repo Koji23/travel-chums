@@ -18,7 +18,7 @@ export default class App extends React.Component {
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
-      username: 'ronaldMcDonald',
+      username: 'cookieMonster',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
       room: 'JTs Fun Emporium',
       header: 'Itinerary List',
@@ -116,8 +116,8 @@ export default class App extends React.Component {
       <div>
         <Router history={browserHistory}>
           <Route path="/"  onEnter={this.requireAuth.bind(this)} component={ItineraryList} itineraryList={this.state.itineraryList} ></Route>
-          <Route path="additinerary" onEnter={this.requireAuth.bind(this)}  component={AddItinerary}></Route>
-          <Route path="groupchatroom" onEnter={this.requireAuth.bind(this)}  component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
+          <Route path="additinerary" onEnter={this.requireAuth.bind(this)} component={AddItinerary} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
+          <Route path="groupchatroom" onEnter={this.requireAuth.bind(this)} component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
           <Route path="login" component={Authentication} mainSocket={this.props.mainSocket}/>
         </Router>
       </div>

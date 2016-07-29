@@ -21153,7 +21153,7 @@
 	      messages: null,
 	      location: '37.7837-122.4090',
 	      userLoggedIn: true,
-	      username: 'ronaldMcDonald',
+	      username: 'cookieMonster',
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
 	      room: 'JTs Fun Emporium',
 	      header: 'Itinerary List',
@@ -21279,7 +21279,7 @@
 	          _reactRouter.Router,
 	          { history: _reactRouter.browserHistory },
 	          _react2.default.createElement(_reactRouter.Route, { path: '/', onEnter: this.requireAuth.bind(this), component: _ItineraryList.ItineraryList, itineraryList: this.state.itineraryList }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', onEnter: this.requireAuth.bind(this), component: _AddItinerary.AddItinerary }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'additinerary', onEnter: this.requireAuth.bind(this), component: _AddItinerary.AddItinerary, mainSocket: this.props.mainSocket, username: this.state.username }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'groupchatroom', onEnter: this.requireAuth.bind(this), component: _ChatRoom.GroupChatRoom, mainSocket: this.props.mainSocket, username: this.state.username }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Authentication.Authentication, mainSocket: this.props.mainSocket })
 	        )
@@ -81004,8 +81004,8 @@
 				var itineraryData = {
 					itinerary: _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value
 				};
-				console.log(itineraryData);
-				this.props.route.mainSocket.emit('send itinerary', itineraryData);
+				console.log(this.props.route.mainSocket);
+				this.props.route.mainSocket.emit('send itinerary', { itinerary: '2016-07-09_jeremysplayhouse_to_neverland', username: this.props.route.username });
 			}
 		}, {
 			key: 'render',
