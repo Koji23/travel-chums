@@ -3,9 +3,16 @@ import { Authentication } from './Authentication';
 // import { Authenticated } from './Authenticated';
 import { ItineraryList } from './ItineraryList';
 import { GroupChatRoom } from './ChatRoom'; 
-import { Nav } from './Nav';
 import { AddItinerary } from './AddItinerary';
+import {Router, Route, IndexRoute, Link, hashHistory, browserHistory} from 'react-router';
 
+const About = (props) => {
+  return (
+    <div>
+      <h1>About</h1>
+    </div>
+  );
+}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,9 +23,9 @@ export default class App extends React.Component {
       messages: null,
       location: '37.7837-122.4090',
       userLoggedIn: true,
-      username: 'anonymous',
+      username: 'ronaldMcDonald',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-      currentRoom: '',
+      room: 'JTs Fun Emporium',
       header: 'Itinerary List',
       leftButton: ''
     };
@@ -100,23 +107,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    let childToRender;
-    if(!this.state.userLoggedIn) {
-      childToRender= <Authentication mainSocket={this.props.mainSocket} />
-    } else if (this.state.pageToRender === 'itineraryList') {
-      this.setLeftButton('settings');
-      childToRender = <ItineraryList itineraryList={this.state.itineraryList} changePageToRender={this.changePageToRender} />
-    } else if (this.state.pageToRender === 'groupChatRoom') {
-      childToRender = <GroupChatRoom username={this.state.username} mainSocket={this.props.mainSocket} />;
-    } else if (this.state.pageToRender === 'addItinerary') {
-      this.setLeftButton('Home');
-      childToRender = <AddItinerary />;
-    }
-    console.log(GroupChatRoom);
+    
     return (
       <div>
-        <Nav header={this.state.header} leftButton={this.state.leftButton} changePageToRender={this.changePageToRender} />
-        {childToRender}
+        <Router history={browserHistory}>
+          <Route path="/" component={ItineraryList} itineraryList={this.state.itineraryList}></Route>
+          <Route path="additinerary" component={AddItinerary}></Route>
+          <Route path="groupchatroom" component={GroupChatRoom} mainSocket={this.props.mainSocket} username={this.state.username}></Route>
+        </Router>
       </div>
 
     );

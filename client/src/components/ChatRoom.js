@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AddMessage } from './AddMessage';
 import { MessageList } from './MessageList';
+import { HomeNav } from './Nav';
+
 import _ from 'lodash';
 
 class GroupChatRoom extends React.Component {
@@ -16,11 +18,11 @@ class GroupChatRoom extends React.Component {
   }
 
   componentDidMount () {
-    this.props.mainSocket.on('typing status', (bool) => {
+    this.props.route.mainSocket.on('typing status', (bool) => {
       this.enableTypingStatus();
       this.debouncedDisableTypingStatus();
     }); 
-    this.props.mainSocket.on('get messages for room', (messages) => {
+    this.props.route.mainSocket.on('get messages for room', (messages) => {
       console.log('23456789', messages);
       this.setState({
         messages: messages
@@ -33,17 +35,17 @@ class GroupChatRoom extends React.Component {
   sendMessage (event) {
     event.preventDefault(); 
     let messageData = {
-      username: this.props.username,
+      username: this.props.route.username,
       message: ReactDOM.findDOMNode(this.refs.message).value,
-      room: '',
+      room: 'default',
       createAt: new Date()
     }
-    console.log(this.props.mainSocket);
-    this.props.mainSocket.emit('send message', messageData);
+    console.log('!!!!!!!', messageData);
+    this.props.route.mainSocket.emit('send message', messageData);
   }
 
   sendTypingStatus () {
-    this.props.mainSocket.emit('send typing status', true);
+    this.props.route.mainSocket.emit('send typing status', true);
   }
 
   enableTypingStatus () {
@@ -61,15 +63,16 @@ class GroupChatRoom extends React.Component {
   }
 
   getMessages () {
-    this.props.mainSocket.emit('get messages for room', this.state.roomname);
+    this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
   }
 
   render () {
     let typingStatus = this.state.typingStatus ? <div>Is Typing...</div> : <div></div>;
     return (
       <div>
+        <HomeNav />
         <h1>GroupChatRoom</h1>
-        <MessageList username={this.props.username} messages={this.state.messages} />
+        <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
         <form>
           <fieldset>
