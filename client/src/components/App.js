@@ -6,6 +6,8 @@ import { GroupChatRoom } from './ChatRoom';
 import { AddItinerary } from './AddItinerary';
 import {Router, Route, IndexRoute, Link, hashHistory, browserHistory, Redirect} from 'react-router';
 
+import { Nav } from './Nav';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -93,6 +95,7 @@ export default class App extends React.Component {
     });
   }
 
+<<<<<<< HEAD
   setLeftButton (buttonValue) {
     this.setState({
       leftButton: buttonValue

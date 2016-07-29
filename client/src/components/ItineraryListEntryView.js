@@ -3,9 +3,6 @@ import Moment from 'moment';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
-
-
-
 var itineraryItem = {
   'height': '80px',  
   'position': 'relative',
