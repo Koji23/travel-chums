@@ -54,7 +54,6 @@ class ItineraryList extends React.Component {
 
 	
 	render () {
-    // console.log('original state', this.props.route);
 		return (
 			<div>
 		    <HomeNav header={'Itinerary List'}/>
