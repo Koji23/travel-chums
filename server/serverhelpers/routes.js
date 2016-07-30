@@ -19,7 +19,7 @@ module.exports = (socket, io, app) => {
 
   socket.on('send message', (message, roomname) => {
     messagesController.createMessage(message, socket);
-    // console.log('heard send message', message);
+    console.log('heard send message', message);
     messagesController.grabMessages(roomname, socket);
   });
 

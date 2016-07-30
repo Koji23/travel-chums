@@ -11,10 +11,11 @@ module.exports = {
     console.log('***', messageData);
     return databaseModels.UserTest.findOne({where: {username: messageData.username}})
     .then(function(data) {
-        // console.log('username id-------------------',data.id);
+        console.log('username id-------4------------',data.id);
         return databaseModels.PublicRoomsTest.findOne({where: {roomName: messageData.room}})
         .then(function(data2) {
             console.log('room id------------%%-----', data2);
+            console.log('data2', data2);
             return databaseModels.PublicMessagesTest.create({
                 message: messageData.message,
                 userTestId: data.id,
