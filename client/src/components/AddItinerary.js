@@ -9,9 +9,9 @@ var input1 = {
 	'width': '320px',
 	'height': '40px',
 	'top': '150px',
-	'margin-bottom': '70px',
+	'margin-bottom': '20px',
 	'margin-left': '40px',
-	'margin-top': '60px'
+	'margin-top': '20px'
 }
 
 var footer = {
@@ -47,22 +47,23 @@ class AddItinerary extends React.Component {
 
 	sendItinerary (event) {
 		event.preventDefault();
-		let itineraryData = {
-			itinerary: 
+		let itineraryData = 
 			ReactDOM.findDOMNode(this.refs.date).value
 			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value
-			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value
-		}
+			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value;
 		console.log(this.props.route.mainSocket)
-		this.props.route.mainSocket.emit('send itinerary', {itinerary: '2016-07-09_jeremysplayhouse_to_neverland', username: this.props.route.username});
+		this.props.route.mainSocket.emit('send itinerary', {itinerary: itineraryData, username: this.props.route.username});
 	}
 
 	render () {
 		return (
 			<div>
-		    <HomeNav/>
+		    <HomeNav header={'Add New Itinerary'}/>
+		    <h1>where are you?</h1>
 				<textarea ref="startCity" style={input1}/>
-				<textarea ref="endCity" style={input1}/>		
+				<h1>where are you going?</h1>
+				<textarea ref="endCity" style={input1}/>
+				<h1>when are you leaving?</h1>
 				<textarea ref="date" style={input1}/>
 				<div style={footer} onClick={(event) => this.sendItinerary(event)}>
 					<div style={newItinerary}>+ submit new itinerary</div>

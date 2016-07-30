@@ -162,7 +162,8 @@ export default class App extends React.Component {
           <Route path="groupchatroom" 
             onEnter={this.requireAuth.bind(this)} 
             component={GroupChatRoom} 
-            mainSocket={this.props.mainSocket} 
+            mainSocket={this.props.mainSocket}
+            header={this.state.room} 
             username={this.state.username}></Route>
           <Route path="login" 
             component={Authentication} 
