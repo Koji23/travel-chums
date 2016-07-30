@@ -14,7 +14,7 @@ class GroupChatRoom extends React.Component {
     this.state = {
       typingStatus: false,
       messages: [],
-      roomname: '2016-06-01_madrid_to_barcelona'
+      roomname: 'playhouse'
     }
     this.debouncedDisableTypingStatus = _.debounce(this.disableTypingStatus, 1000);
   }
@@ -24,8 +24,9 @@ class GroupChatRoom extends React.Component {
       this.enableTypingStatus();
       this.debouncedDisableTypingStatus();
     }); 
+
     this.props.route.mainSocket.on('get messages for room', (messages) => {
-      console.log('23456789', messages);
+      console.log('!!!!!!!!!!!', messages);
       this.setState({
         messages: messages
       });
@@ -55,17 +56,16 @@ class GroupChatRoom extends React.Component {
     this.setState({
       typingStatus: true
     });
-    console.log('toggle ', true);
   }
   
   disableTypingStatus () {
     this.setState({
       typingStatus: false
     });
-    console.log('toggle ', false);
   }
 
   getMessages () {
+    console.log('gettings messages........');
     this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
   }
 

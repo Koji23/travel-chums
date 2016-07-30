@@ -21140,6 +21140,12 @@
 	// import { Authenticated } from './Authenticated';
 
 
+	var options = {
+	  enableHighAccuracy: true,
+	  timeout: 5000,
+	  maximumAge: 0
+	};
+
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
@@ -21193,6 +21199,8 @@
 	        });
 	        console.log(_this2.state.itineraryList);
 	      });
+
+	      this.updateLocationState();
 	    }
 
 	    //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
@@ -21200,13 +21208,19 @@
 	  }, {
 	    key: 'setPosition',
 	    value: function setPosition(position) {
-	      var latRound = position.coords.latitude.toFixed(3);
-	      var lonRound = position.coords.longitude.toFixed(3);
-	      var location = latRound.toString() + lonRound.toString();
-	      this.setState({
-	        location: location
-	      });
-	      this.updateMessagesState();
+	      var crd = position.coords;
+
+	      console.log('Your current position is:');
+	      console.log('Latitude : ' + crd.latitude);
+	      console.log('Longitude: ' + crd.longitude);
+	      console.log('More or less ' + crd.accuracy + ' meters.');
+	      // const latRound = position.coords.latitude.toFixed(3);
+	      // const lonRound = position.coords.longitude.toFixed(3);
+	      // const location = latRound.toString() + lonRound.toString();
+	      // this.setState({
+	      //   location,
+	      // });
+	      // this.updateMessagesState();
 	    }
 
 	    //will watch our location and frequently call set position
@@ -21215,10 +21229,15 @@
 	    key: 'updateLocationState',
 	    value: function updateLocationState() {
 	      if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(this.setPosition.bind(this), this.error);
+	        navigator.geolocation.getCurrentPosition(this.setPosition.bind(this), this.error, options);
 	      } else {
 	        console.log('geolocation not supported');
 	      }
+	    }
+	  }, {
+	    key: 'error',
+	    value: function error(err) {
+	      console.warn('ERROR(' + err.code + '): ' + err.message);
 	    }
 
 	    //socket request to the main server to update messages state based on location state
@@ -64159,7 +64178,7 @@
 	    _this.state = {
 	      typingStatus: false,
 	      messages: [],
-	      roomname: '2016-06-01_madrid_to_barcelona'
+	      roomname: 'playhouse'
 	    };
 	    _this.debouncedDisableTypingStatus = _lodash2.default.debounce(_this.disableTypingStatus, 1000);
 	    return _this;
@@ -64174,8 +64193,9 @@
 	        _this2.enableTypingStatus();
 	        _this2.debouncedDisableTypingStatus();
 	      });
+
 	      this.props.route.mainSocket.on('get messages for room', function (messages) {
-	        console.log('23456789', messages);
+	        console.log('!!!!!!!!!!!', messages);
 	        _this2.setState({
 	          messages: messages
 	        });
@@ -64208,7 +64228,6 @@
 	      this.setState({
 	        typingStatus: true
 	      });
-	      console.log('toggle ', true);
 	    }
 	  }, {
 	    key: 'disableTypingStatus',
@@ -64216,11 +64235,11 @@
 	      this.setState({
 	        typingStatus: false
 	      });
-	      console.log('toggle ', false);
 	    }
 	  }, {
 	    key: 'getMessages',
 	    value: function getMessages() {
+	      console.log('gettings messages........');
 	      this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
 	    }
 	  }, {

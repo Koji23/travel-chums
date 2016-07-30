@@ -8,6 +8,11 @@ import {Router, Route, IndexRoute, Link, hashHistory, browserHistory, Redirect} 
 
 import { Nav } from './Nav';
 
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,28 +59,38 @@ export default class App extends React.Component {
       console.log(this.state.itineraryList)
     })
 
-
+    this.updateLocationState();
   }
 
 
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
   setPosition(position) {
-    const latRound = position.coords.latitude.toFixed(3);
-    const lonRound = position.coords.longitude.toFixed(3);
-    const location = latRound.toString() + lonRound.toString();
-    this.setState({
-      location,
-    });
-    this.updateMessagesState();
+    var crd = position.coords;
+
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+    // const latRound = position.coords.latitude.toFixed(3);
+    // const lonRound = position.coords.longitude.toFixed(3);
+    // const location = latRound.toString() + lonRound.toString();
+    // this.setState({
+    //   location,
+    // });
+    // this.updateMessagesState();
   }
 
   //will watch our location and frequently call set position
   updateLocationState() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.setPosition.bind(this), this.error);
+      navigator.geolocation.getCurrentPosition(this.setPosition.bind(this), this.error, options);
     } else {
       console.log('geolocation not supported');
     }
+  }
+
+  error (err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
   }
 
   //socket request to the main server to update messages state based on location state

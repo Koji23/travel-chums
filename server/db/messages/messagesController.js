@@ -26,17 +26,18 @@ module.exports = {
     var messageData = [];
     return databaseModels.PublicRoomsTest.findOne({where: {roomName: roomname}})
     .then(function(data) {
-      console.log(data.dataValues)
       return databaseModels.PublicMessagesTest.findAll({where: {publicRoomsTestId: data.dataValues.id}})      
     })
     .then(function(data2){
-      return data2.forEach(function(messageInstance) {
-        console.log(messageInstance.dataValues.message)
-        messageData.push(messageInstance.dataValues.message)
+      
+      data2.forEach(function(messageInstance) {
+        messageData.push({username: messageInstance.dataValues.userTestId, message: messageInstance.dataValues.message})
       })
+      
+      return messageData;
     })
-    .then(function() {
-      // socket.emit(TIE IN TO FRONT END HERE);
+    .then(function(data3) {
+      socket.emit('get messages for room', data3);
     })
   }
 };

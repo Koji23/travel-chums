@@ -78,6 +78,12 @@ sequelize
   var PublicMessagesTest = sequelize.define('publicMessagesTest', {
     message: {
       type: Sequelize.STRING
+    },
+    username: {
+      type: Sequelize.STRING
+    },
+    photo: {
+      type: Sequelize.STRING
     }
   });
 

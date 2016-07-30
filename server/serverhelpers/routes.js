@@ -18,6 +18,7 @@ module.exports = (socket, io, app) => {
 
   socket.on('send message', (message, roomname) => {
     messagesController.createMessage(message);
+    console.log('heard send message');
     io.emit('get messages for room', dummyData); // send back all messages
   });
 
