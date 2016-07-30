@@ -2,11 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Glyphicon} from 'react-bootstrap';
 
-var nav = {
-    'backgroundColor': '#0898A1',
-    'height': '100px',
-    'position': 'relative'
-}
 
 var header = {
   'textAlign': 'center',
@@ -43,7 +38,7 @@ var glyphNav = {
 
 const HomeNav = (props) => {
   return (
-    <nav style={nav}>
+    <nav className='navClass'>
       <div style={header}>{ props.header }</div>
       <Link to="/" style={leftButton}><Glyphicon glyph="home" style={glyphNav}/></Link>
       <Link to="/" style={rightButton}><Glyphicon glyph="cog" style={glyphNav}/></Link>

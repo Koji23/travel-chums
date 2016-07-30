@@ -41097,6 +41097,8 @@
 
 	var _reactRouter = __webpack_require__(548);
 
+	var _reactBootstrap = __webpack_require__(174);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41126,6 +41128,13 @@
 		'height': '530',
 		'display': 'flex',
 		'flex-direction': 'column'
+	};
+
+	var plusGlyph = {
+		'font-size': '10em',
+		'color': 'orange',
+		'display': 'block',
+		'text-align': 'center'
 	};
 
 	var ItineraryList = function (_React$Component) {
@@ -41165,16 +41174,12 @@
 						})
 					),
 					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: '/additinerary' },
+						'div',
+						null,
 						_react2.default.createElement(
-							'div',
-							{ style: footer },
-							_react2.default.createElement(
-								'div',
-								{ style: newItinerary },
-								'+ add new itinerary'
-							)
+							_reactRouter.Link,
+							{ to: '/additinerary' },
+							_react2.default.createElement(_reactBootstrap.Glyphicon, { style: plusGlyph, glyph: 'plus-sign' })
 						)
 					)
 				);
@@ -41209,6 +41214,8 @@
 
 	var _reactRouter = __webpack_require__(548);
 
+	var _reactBootstrap = __webpack_require__(174);
+
 	var _RaisedButton = __webpack_require__(609);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
@@ -41222,17 +41229,15 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var itineraryItem = {
-	  'height': '80px',
+	  'height': '100px',
 	  'position': 'relative',
-	  'border-bottom-width': '1px',
-	  'border-bottom-style': 'solid',
-	  'background-color': 'rgba(255, 255, 255, 0.22)',
-	  'border-radius': '7px',
-	  'margin': '2px',
 	  'display': 'flex',
 	  'align-items': 'center',
-	  'justify-content': 'flex-start'
-
+	  'justify-content': 'flex-start',
+	  'background-color': 'white',
+	  'margin-bottom': '10px',
+	  'width': '95%',
+	  'margin-left': '2.5%'
 	};
 
 	var itineraryDate = {
@@ -41244,10 +41249,14 @@
 
 	var itineraryDetails = {
 	  'font': '1.7em "Open Sans", sans-serif',
-	  'color': 'white',
+	  'color': 'rgb(58, 58, 58)',
 	  'text-align': 'left',
 	  'overflow': 'hidden',
 	  'text-overflow': 'ellipses'
+	};
+
+	var hamburger = {
+	  'float': 'right'
 	};
 
 	// export const ItineraryListEntryView = (props) => (
@@ -41296,6 +41305,11 @@
 	            'span',
 	            { style: itineraryDetails },
 	            this.props.itinerary.replace('_to_', ' to ').split('_').slice(1)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_reactBootstrap.Glyphicon, { style: hamburger, glyph: 'menu-hamburger' })
 	          )
 	        )
 	      );
@@ -63790,12 +63804,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var nav = {
-	  'backgroundColor': '#0898A1',
-	  'height': '100px',
-	  'position': 'relative'
-	};
-
 	var header = {
 	  'textAlign': 'center',
 	  'position': 'relative',
@@ -63831,7 +63839,7 @@
 	var HomeNav = function HomeNav(props) {
 	  return _react2.default.createElement(
 	    'nav',
-	    { style: nav },
+	    { className: 'navClass' },
 	    _react2.default.createElement(
 	      'div',
 	      { style: header },
@@ -80874,8 +80882,6 @@
 
 	var _Nav = __webpack_require__(634);
 
-	var _Icon = __webpack_require__(690);
-
 	var _reactBootstrap = __webpack_require__(174);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -88417,45 +88423,6 @@
 	};
 
 
-
-/***/ },
-/* 690 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Icon = undefined;
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var PropTypes = _react2.default.PropTypes;
-
-
-	var icons = {
-	  trash: 'M192 1024h640l64-704h-768zM640 128v-128h-256v128h-320v192l64-64h768l64 64v-192h-320zM576 128h-128v-64h128v64z',
-	  facebook: 'M608 192h160v-192h-160c-123.514 0-224 100.486-224 224v96h-128v192h128v512h192v-512h160l32-192h-192v-96c0-17.346 14.654-32 32-32z'
-	};
-
-	var Icon = function Icon(props) {
-	  return _react2.default.createElement(
-	    'svg',
-	    { width: '22', height: '22', viewBox: '0 0 1024 1024' },
-	    _react2.default.createElement('path', { d: icons[props.icon] })
-	  );
-	};
-
-	Icon.propTypes = {
-	  icon: PropTypes.string.isRequired
-	};
-
-	exports.Icon = Icon;
 
 /***/ }
 /******/ ]);
