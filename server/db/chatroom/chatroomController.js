@@ -30,11 +30,12 @@ module.exports = {
         var roomIdList = data.map(function(item) {
           return item.dataValues.roomId;
         })
+        // console.log('039847102938471092834701928347198023471p3984712938471092384710928347', roomIdList)
         db.PublicRoomsTest.findAll({where: {id: {$or: roomIdList}}}).then(function(data1) {
           var roomNames = data1.map(function(item) {
             return item.dataValues.roomName;
           })
-          console.log(roomNames);
+          // console.log(roomNames);
           socket.emit('send rooms to front end', roomNames);
         })
       })
