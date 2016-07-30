@@ -63945,7 +63945,7 @@
 	      var messageData = {
 	        username: this.props.route.username,
 	        message: _reactDom2.default.findDOMNode(this.refs.message).value,
-	        room: this.state.roomname,
+	        room: this.props.params.name,
 	        photo: _reactDom2.default.findDOMNode(this.refs.photo).src
 	      };
 	      console.log('message being sent!!!!!!!!!!');
@@ -80876,6 +80876,8 @@
 	var _Icon = __webpack_require__(641);
 	
 	var _reactBootstrap = __webpack_require__(174);
+	
+	var _reactRouter = __webpack_require__(547);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	

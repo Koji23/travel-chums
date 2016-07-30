@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { HomeNav } from './Nav';
 import {Icon} from './Icon';
 import {Glyphicon} from 'react-bootstrap';
+import {Link} from 'react-router';
 
 var input1 = {
 	'border': '1px solid black',
@@ -67,9 +68,11 @@ class AddItinerary extends React.Component {
 				<textarea ref="endCity" style={input1}/>
 				<h1>when are you leaving?</h1>
 				<textarea ref="date" style={input1}/>
-				<div style={footer} onClick={(event) => this.sendItinerary(event)}>
-					<div style={newItinerary}>+ submit new itinerary</div>
-				</div>
+					<div style={footer} onClick={(event) => this.sendItinerary(event)}>
+
+						<div style={newItinerary}>+ submit new itinerary</div>
+						
+					</div>
 			</div>
 			
 		);
