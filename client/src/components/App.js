@@ -146,7 +146,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Router history={hashHistory}>
+        <Router history={browserHistory}>
           <Route path="/"  
             onEnter={this.requireAuth.bind(this)}
             component={ItineraryList} 

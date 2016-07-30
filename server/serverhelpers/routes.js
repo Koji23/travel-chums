@@ -1,4 +1,5 @@
  /* eslint-disable */
+const path = require('path');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const chatroomController = require('../db/chatroom/chatroomController.js');
@@ -62,6 +63,10 @@ module.exports = (socket, io, app) => {
     function(req, res) {
       // Successful authentication, redirect home.
       res.redirect('/');
+  });
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 
 };
