@@ -11,10 +11,10 @@ module.exports = {
     console.log('***', messageData);
     return databaseModels.UserTest.findOne({where: {username: messageData.username}})
     .then(function(data) {
-        // console.log('username id', data.id);
+        // console.log('username id-------------------',data.id);
         return databaseModels.PublicRoomsTest.findOne({where: {roomName: messageData.room}})
         .then(function(data2) {
-            // console.log('room id', data2.id);
+            console.log('room id------------%%-----', data2);
             return databaseModels.PublicMessagesTest.create({
                 message: messageData.message,
                 userTestId: data.id,
@@ -39,7 +39,7 @@ module.exports = {
       // console.log("??data2??", data2);
 
       data2.forEach(function(messageInstance) {
-        messageData.push({username: messageInstance.dataValues.userTestId, message: messageInstance.dataValues.message})
+        messageData.push({username: messageInstance.dataValues.username, message: messageInstance.dataValues.message})
       })
       
       return messageData;

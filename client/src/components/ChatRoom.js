@@ -79,7 +79,7 @@ class GroupChatRoom extends React.Component {
         {typingStatus}
         <form>
           <fieldset>
-            <img ref="photo" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG"  className="userPhoto"/>
+            <img ref="photo" src={this.props.route.userphoto}  className="userPhoto"/>
             <legend style={{color:'white'}}>Send:</legend>
             <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>
             <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" style={{color:'white'}} />

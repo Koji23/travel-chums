@@ -7,6 +7,7 @@ require('./passport.js');
 // db is defined in config.js and passed in as module.exports.connect;
 // const db = require('./db/config.js');
 // db.connect();
+module.exports = io;
 
 // Invoke middleware function on app to 'use' all middleware functions.
 const middleware = require('./serverhelpers/middleware.js');

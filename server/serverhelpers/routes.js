@@ -61,7 +61,8 @@ module.exports = (socket, io, app) => {
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      // Successful authentication, redirect home.
+      // Successful authentication, redirect ho11me.
+      console.log('WOoOOOOOOOOOOOHHOOOOOOOOOOOO!!', {username:req.user.displayName, photo:req.user.photos[0].value});
       res.redirect('/');
   });
 
