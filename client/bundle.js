@@ -41063,7 +41063,7 @@
 	
 	var plusGlyph = {
 		'font-size': '10em',
-		'color': 'orange',
+		'color': '#EB7D6C',
 		'display': 'block',
 		'text-align': 'center'
 	};
@@ -41205,6 +41205,12 @@
 	  'float': 'right'
 	};
 	
+	var dateBlock = {
+	  'background-color': 'rgba(183, 183, 183, 0.14)',
+	  'height': '100px',
+	  'width': '100px'
+	};
+	
 	// export const ItineraryListEntryView = (props) => (
 	//     <div style={itineraryItem}>
 	//       <span style={itineraryDate}>
@@ -41243,19 +41249,18 @@
 	          'div',
 	          { style: itineraryItem },
 	          _react2.default.createElement(
-	            'span',
-	            { style: itineraryDate },
-	            this.props.itinerary.split('_').slice(0, 1)
+	            'div',
+	            { style: dateBlock },
+	            _react2.default.createElement(
+	              'span',
+	              { style: itineraryDate },
+	              this.props.itinerary.split('_').slice(0, 1)
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            { style: itineraryDetails },
 	            this.props.itinerary.replace('_to_', ' to ').split('_').slice(1)
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_reactBootstrap.Glyphicon, { style: hamburger, glyph: 'menu-hamburger' })
 	          )
 	        )
 	      );
