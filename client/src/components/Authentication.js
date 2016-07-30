@@ -78,8 +78,8 @@ export class Authentication extends React.Component {
 
       <div className="loginClass" style={authStyle}>
         <div>
-          <h1> Travel Chums </h1>
-          <p> Authentication </p>
+          <h1> TRAVEL CHUMS </h1>
+          <p> Never Travel Alone </p>
         </div>
         <h4><b>Sign in with facebook</b></h4>
         <button>
