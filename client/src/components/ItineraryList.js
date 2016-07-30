@@ -1,7 +1,7 @@
 import React from 'react';
 import { ItineraryListEntryView } from './ItineraryListEntryView';
 import { HomeNav } from './Nav';
-
+import { Link } from 'react-router';
 
 var footer = {
   'position': 'absolute',
@@ -30,7 +30,7 @@ class ItineraryList extends React.Component {
 
 	constructor (props) {
     super(props);
-		this.getChatRooms();
+    console.log('first set of props', props.route.changeRoom)
   };
 
   // get list of chat rooms for that user
@@ -46,12 +46,14 @@ class ItineraryList extends React.Component {
 		    <HomeNav/>
 				<div style={itineraryContainer}>
 				{this.props.route.itineraryList.map((itinerary) => (
-					<ItineraryListEntryView itinerary={ itinerary } />
+					<ItineraryListEntryView changeRoom={this.props.route.changeRoom} itinerary={ itinerary } />
 				))}
 				</div>
-				<div style={footer} >
-					<div style={newItinerary} >+ add new itinerary</div>
-				</div>
+				<Link to={'/additinerary'}>
+					<div style={footer} >
+						<div style={newItinerary} >+ add new itinerary</div>
+					</div>
+				</Link>
 			</div>
 		);	
 	}

@@ -1,5 +1,7 @@
 import React from 'react';
 import Moment from 'moment';
+import { Link } from 'react-router';
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -33,15 +35,40 @@ var itineraryDetails = {
 }
 
 
+// export const ItineraryListEntryView = (props) => (
+//     <div style={itineraryItem}>
+//       <span style={itineraryDate}>
+//         { props.itinerary.split('_').slice(0, 1) }
+//       </span>
+//       <span style={itineraryDetails}>
+//         { props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
+//       </span>
+//     </div>
+// )
 
 
-export const ItineraryListEntryView = (props) => (
-    <div style={itineraryItem}>
-      <span style={itineraryDate}>
-        { props.itinerary.split('_').slice(0, 1) }
-      </span>
-      <span style={itineraryDetails}>
-        { props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
-      </span>
-    </div>
-)
+class ItineraryListEntryView extends React.Component {
+  
+  constructor (props) {
+    super(props);
+    console.log('entry list of props', props);
+  };
+
+  render () {
+    return (
+      <Link to={"groupchatroom"} onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
+        <div style={itineraryItem}>
+          <span style={itineraryDate}>
+            { this.props.itinerary.split('_').slice(0, 1) }
+          </span>
+          <span style={itineraryDetails}>
+            { this.props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
+          </span>
+        </div>
+      </Link>
+    );
+  }
+}
+
+export {ItineraryListEntryView};
+

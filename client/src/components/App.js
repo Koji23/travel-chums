@@ -36,7 +36,7 @@ export default class App extends React.Component {
     this.createChatRoom = this.createChatRoom.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
     this.changePageToRender = this.changePageToRender.bind(this);
-    // this.getChatRooms = this.getChatRooms.bind(this);
+    // this.changeRoom = this.changeRoom.bind(this);
 
     //listens for a messages update from the main server
     this.props.mainSocket.on('updateMessagesState', (location) => {
@@ -56,7 +56,7 @@ export default class App extends React.Component {
       this.setState({
         itineraryList: rooms
       })
-      console.log(this.state.itineraryList)
+      console.log('new state for itinerary list:', this.state.itineraryList)
     })
 
     this.updateLocationState();
@@ -135,6 +135,13 @@ export default class App extends React.Component {
     }
   }
 
+  changeRoom (newRoom) {
+    this.setState({
+      room: newRoom
+    });
+    console.log('the new room is', this.state.room)
+  }
+
   render() {
 
     return (
@@ -145,6 +152,7 @@ export default class App extends React.Component {
             component={ItineraryList} 
             itineraryList={this.state.itineraryList}
             username={this.state.username}
+            changeRoom={this.changeRoom.bind(this)}
             mainSocket={this.props.mainSocket}></Route>
           <Route path="additinerary" 
             onEnter={this.requireAuth.bind(this)} 
