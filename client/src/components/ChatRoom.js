@@ -36,13 +36,12 @@ class GroupChatRoom extends React.Component {
   }
 
   sendMessage (event) {
-    event.preventDefault(); 
+    event.preventDefault();
     let messageData = {
       username: this.props.route.username,
       message: ReactDOM.findDOMNode(this.refs.message).value,
-      room: 'default',
-      createAt: new Date(),
-      photo: ''
+      room: this.state.roomname,
+      photo: ReactDOM.findDOMNode(this.refs.photo).src
     }
     console.log('!!!!!!!', messageData);
 
@@ -66,7 +65,7 @@ class GroupChatRoom extends React.Component {
   }
 
   getMessages () {
-    console.log('gettings messages........');
+    // console.log('gettings messages........');
     this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
   }
 
@@ -80,6 +79,7 @@ class GroupChatRoom extends React.Component {
         {typingStatus}
         <form>
           <fieldset>
+            <img ref="photo" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG"  className="userPhoto"/>
             <legend style={{color:'white'}}>Send:</legend>
             <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>
             <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" style={{color:'white'}} />
