@@ -64210,8 +64210,8 @@
 	      var messageData = {
 	        username: this.props.route.username,
 	        message: _reactDom2.default.findDOMNode(this.refs.message).value,
-	        room: 'default',
-	        createAt: new Date()
+	        room: this.state.roomname,
+	        photo: _reactDom2.default.findDOMNode(this.refs.photo).src
 	      };
 	      console.log('!!!!!!!', messageData);
 
@@ -64239,7 +64239,7 @@
 	  }, {
 	    key: 'getMessages',
 	    value: function getMessages() {
-	      console.log('gettings messages........');
+	      // console.log('gettings messages........');
 	      this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
 	    }
 	  }, {
@@ -64269,6 +64269,7 @@
 	          _react2.default.createElement(
 	            'fieldset',
 	            null,
+	            _react2.default.createElement('img', { ref: 'photo', src: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG', className: 'userPhoto' }),
 	            _react2.default.createElement(
 	              'legend',
 	              { style: { color: 'white' } },
