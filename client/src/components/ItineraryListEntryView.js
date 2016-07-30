@@ -59,13 +59,8 @@ class ItineraryListEntryView extends React.Component {
 
   render () {
     return (
-<<<<<<< HEAD
-      <Link to="groupchatroom" onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
-        <div style={itineraryItem} >
-=======
       <Link to={`groupchatroom/${this.props.itinerary}`} onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
         <div style={itineraryItem}>
->>>>>>> a4aa869128c086e61414ce3f72124a7ebf0a4de5
           <span style={itineraryDate}>
             { this.props.itinerary.split('_').slice(0, 1) }
           </span>
