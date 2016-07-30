@@ -21461,10 +21461,8 @@
 	        margin: 'auto auto',
 	        width: '80%',
 	        height: '100%',
-	        border: '1px solid black',
 	        padding: '7%',
-	        textAlign: 'center',
-	        background: '#CCC'
+	        textAlign: 'center'
 	      };
 	
 	      var jumboStyle = {
@@ -21492,7 +21490,7 @@
 	        { style: authStyle },
 	        _react2.default.createElement(
 	          _reactBootstrap.Jumbotron,
-	          { style: jumboStyle },
+	          null,
 	          _react2.default.createElement(
 	            'h1',
 	            null,
@@ -21528,6 +21526,19 @@
 	
 	  return Authentication;
 	}(_react2.default.Component);
+	
+	// <div class="homepage-hero-module">
+	//   <div class="video-container">
+	//       <div class="filter"></div>
+	//       <video autoplay loop class="fillWidth">
+	//           <source src="PATH_TO_MP4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+	//           <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+	//       </video>
+	//       <div class="poster hidden">
+	//           <img src="PATH_TO_JPEG" alt="">
+	//       </div>
+	//   </div>
+	// </div>
 
 /***/ },
 /* 174 */
