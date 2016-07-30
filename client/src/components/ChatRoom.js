@@ -75,11 +75,12 @@ class GroupChatRoom extends React.Component {
       <div>
         <HomeNav header={this.props.route.header} leftButton={'Home'}/>
         <h1 style={{color:'white'}}>GroupChatRoom</h1>
+
         <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
         <form>
           <fieldset>
-            <img ref="photo" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG"  className="userPhoto"/>
+            <img ref="photo" src={this.props.route.userphoto}  className="userPhoto"/>
             <legend style={{color:'white'}}>Send:</legend>
             <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>
             <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" style={{color:'white'}} />

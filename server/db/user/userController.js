@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+
+
 // const User = require('./userModel.js');
 // const mongoose = require('mongoose');
 // mongoose.Promise = require('bluebird');
@@ -36,13 +38,16 @@
 const sequelize = require('sequelize');
 const db = require('../config.js');
 
+// var io = require('../../server.js');
+// console.log(">>>>>><<<<<<<<", io);
 
 module.exports = {
   
   createNewUser: (socket, id, name, photo) => {
-    db.UserTest.findOrCreate({where: {facebookId: id, username: name, displayName: name}})
+    db.UserTest.findOrCreate({where: {facebookId: id, username: name, displayName: name, photo: photo}})
     .then(function(user) {
-      console.log('USER------------------------------', user);
+      console.log('USER------------------------------', user, photo);
+      // io.emit('update user', {username: user.username, photo:photo})
     })
   }
 };

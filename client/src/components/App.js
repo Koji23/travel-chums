@@ -24,8 +24,9 @@ export default class App extends React.Component {
       location: '37.7837-122.4090',
       userLoggedIn: true,
       username: 'cookieMonster',
+      userphoto: 'http://i.imgur.com/2muFGLB.jpg',
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-      room: 'JTs Fun Emporium',
+      room: 'none',
       header: 'Itinerary List',
       leftButton: ''
     };
@@ -58,6 +59,15 @@ export default class App extends React.Component {
       })
       console.log('new state for itinerary list:', this.state.itineraryList)
     })
+
+    this.props.mainSocket.on('update user', (data) => {
+      console.log("UPDATING USER!", data);
+      // this.setState({
+      //   username: '',
+      //   userphoto: ''
+      // });
+
+    });
 
     this.updateLocationState();
   }
@@ -136,10 +146,12 @@ export default class App extends React.Component {
   }
 
   changeRoom (newRoom) {
+    console.log('the new room should be', newRoom)
     this.setState({
       room: newRoom
     });
-    console.log('the new room is', this.state.room)
+     console.log('the new room is now', this.state.room);
+
   }
 
   render() {
@@ -164,7 +176,9 @@ export default class App extends React.Component {
             component={GroupChatRoom} 
             mainSocket={this.props.mainSocket}
             header={this.state.room} 
-            username={this.state.username}></Route>
+            username={this.state.username}
+            room={this.state.room}
+            userphoto={this.state.userphoto}></Route>
           <Route path="login" 
             component={Authentication} 
             mainSocket={this.props.mainSocket}></Route>

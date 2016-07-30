@@ -13,7 +13,7 @@ export const MessageList = (props) => {
     border: '#7F8A7F solid 2px'
   }
   return (
-    <div style={{border: '1px solid black',fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px'}} >
+    <div style={{border: '1px solid black',fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px', overflow:"scroll", height:"400px"}} >
       <ul fill>
         {props.messages.map((message, index) => {
           if(message.username === props.username) {
@@ -26,7 +26,6 @@ export const MessageList = (props) => {
     </div>
   );
 };
-
 
 
 // .bubble:after 

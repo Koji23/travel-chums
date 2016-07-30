@@ -21160,8 +21160,9 @@
 	      location: '37.7837-122.4090',
 	      userLoggedIn: true,
 	      username: 'cookieMonster',
+	      userphoto: 'http://i.imgur.com/2muFGLB.jpg',
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-	      room: 'JTs Fun Emporium',
+	      room: 'none',
 	      header: 'Itinerary List',
 	      leftButton: ''
 	    };
@@ -21198,6 +21199,14 @@
 	          itineraryList: rooms
 	        });
 	        console.log('new state for itinerary list:', _this2.state.itineraryList);
+	      });
+
+	      this.props.mainSocket.on('update user', function (data) {
+	        console.log("UPDATING USER!", data);
+	        // this.setState({
+	        //   username: '',
+	        //   userphoto: ''
+	        // });
 	      });
 
 	      this.updateLocationState();
@@ -21297,10 +21306,11 @@
 	  }, {
 	    key: 'changeRoom',
 	    value: function changeRoom(newRoom) {
+	      console.log('the new room should be', newRoom);
 	      this.setState({
 	        room: newRoom
 	      });
-	      console.log('the new room is', this.state.room);
+	      console.log('the new room is now', this.state.room);
 	    }
 	  }, {
 	    key: 'render',
@@ -21329,7 +21339,9 @@
 	            component: _ChatRoom.GroupChatRoom,
 	            mainSocket: this.props.mainSocket,
 	            header: this.state.room,
-	            username: this.state.username }),
+	            username: this.state.username,
+	            room: this.state.room,
+	            userphoto: this.state.userphoto }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
 	            component: _Authentication.Authentication,
 	            mainSocket: this.props.mainSocket })
@@ -41201,8 +41213,8 @@
 	      var _this2 = this;
 
 	      return _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: "groupchatroom", onClick: function onClick(event) {
+	        'button',
+	        { onClick: function onClick(event) {
 	            return _this2.props.changeRoom(_this2.props.itinerary);
 	          } },
 	        _react2.default.createElement(
@@ -63959,7 +63971,7 @@
 	          _react2.default.createElement(
 	            'fieldset',
 	            null,
-	            _react2.default.createElement('img', { ref: 'photo', src: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Panda_Cub_from_Wolong,_Sichuan,_China.JPG', className: 'userPhoto' }),
+	            _react2.default.createElement('img', { ref: 'photo', src: this.props.route.userphoto, className: 'userPhoto' }),
 	            _react2.default.createElement(
 	              'legend',
 	              { style: { color: 'white' } },
@@ -64114,7 +64126,7 @@
 	  };
 	  return _react2.default.createElement(
 	    'div',
-	    { style: { border: '1px solid black', fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px' } },
+	    { style: { border: '1px solid black', fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px', overflow: "scroll", height: "400px" } },
 	    _react2.default.createElement(
 	      'ul',
 	      { fill: true },
