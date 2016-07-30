@@ -45,7 +45,6 @@ class ItineraryList extends React.Component {
     this.getChatRooms();
   }
 
->>>>>>> itinerary list render working
   // get list of chat rooms for that user
   getChatRooms() {
     this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
