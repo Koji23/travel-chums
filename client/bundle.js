@@ -21166,7 +21166,6 @@
 	      header: 'Itinerary List',
 	      leftButton: ''
 	    };
-	    // console.log(">>>>>>>>>>>>>>>>>>>>", this.state);
 	    return _this;
 	  }
 	
@@ -21195,12 +21194,12 @@
 	        });
 	      });
 	
-	      this.props.mainSocket.on('send rooms to front end', function (rooms) {
-	        _this2.setState({
-	          itineraryList: rooms
-	        });
-	        // console.log('new state for itinerary list:', this.state.itineraryList)
-	      });
+	      // this.props.mainSocket.on('send rooms to front end', (rooms) => {
+	      //   this.setState({
+	      //     itineraryList: rooms
+	      //   })
+	      //   // console.log('new state for itinerary list:', this.state.itineraryList)
+	      // })
 	
 	      this.props.mainSocket.on('update user', function (data) {
 	        console.log("UPDATING USER!", data);
@@ -21212,11 +21211,6 @@
 	
 	      this.updateLocationState();
 	    }
-	
-	    // componentDidUpdate() {
-	    //   console.log(this.state.itineraryList);
-	    // }
-	
 	
 	    //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
 	
@@ -21312,11 +21306,9 @@
 	  }, {
 	    key: 'changeRoom',
 	    value: function changeRoom(newRoom) {
-	      console.log('the new room should be', newRoom);
 	      this.setState({
 	        room: newRoom
 	      });
-	      console.log('the new room is now', this.state.room);
 	    }
 	  }, {
 	    key: 'render',
@@ -41100,14 +41092,13 @@
 	  }, {
 	    key: 'getChatRooms',
 	    value: function getChatRooms() {
-	      this.props.route.mainSocket.emit('get chatrooms', { username: 'cookieMonster' });
+	      this.props.route.mainSocket.emit('get chatrooms', { username: this.props.route.username });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
 	
-	      console.log('is array?', Array.isArray(this.state.rooms), 'original state', this.props.route.itineraryList);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -63941,12 +63932,10 @@
 	      });
 	
 	      this.props.route.mainSocket.on('get messages for room', function (messages) {
-	        console.log('!!!!!!!!!!!', messages);
 	        _this2.setState({
 	          messages: messages
 	        });
 	      });
-	
 	      this.getMessages();
 	    }
 	  }, {
@@ -63959,8 +63948,8 @@
 	        room: this.state.roomname,
 	        photo: _reactDom2.default.findDOMNode(this.refs.photo).src
 	      };
-	
-	      this.props.route.mainSocket.emit('send message', messageData, this.state.roomname);
+	      console.log('message being sent!!!!!!!!!!');
+	      this.props.route.mainSocket.emit('send message', messageData, this.props.params.name);
 	    }
 	  }, {
 	    key: 'sendTypingStatus',
@@ -63984,7 +63973,7 @@
 	  }, {
 	    key: 'getMessages',
 	    value: function getMessages() {
-	      this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
+	      this.props.route.mainSocket.emit('get messages for room', this.props.params.name);
 	    }
 	  }, {
 	    key: 'render',
@@ -80949,7 +80938,6 @@
 			value: function sendItinerary(event) {
 				event.preventDefault();
 				var itineraryData = _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value;
-				console.log(this.props.route.mainSocket);
 				this.props.route.mainSocket.emit('send itinerary', { itinerary: itineraryData, username: this.props.route.username });
 			}
 		}, {
@@ -80979,7 +80967,7 @@
 						null,
 						'when are you leaving?'
 					),
-					_react2.default.createElement('input', { type: 'date', style: input1 }),
+					_react2.default.createElement('textarea', { ref: 'date', style: input1 }),
 					_react2.default.createElement(
 						'div',
 						{ style: footer, onClick: function onClick(event) {
@@ -80999,6 +80987,8 @@
 	}(_react2.default.Component);
 	
 	exports.AddItinerary = AddItinerary;
+	
+	// <input type="date" style={input1}/>
 
 /***/ },
 /* 641 */

@@ -29,7 +29,6 @@ export default class App extends React.Component {
       header: 'Itinerary List',
       leftButton: ''
     };
-    // console.log(">>>>>>>>>>>>>>>>>>>>", this.state);
   }
 
   componentDidMount() {
@@ -53,12 +52,12 @@ export default class App extends React.Component {
       });
     });
 
-    this.props.mainSocket.on('send rooms to front end', (rooms) => {
-      this.setState({
-        itineraryList: rooms
-      })
-      // console.log('new state for itinerary list:', this.state.itineraryList)
-    })
+    // this.props.mainSocket.on('send rooms to front end', (rooms) => {
+    //   this.setState({
+    //     itineraryList: rooms
+    //   })
+    //   // console.log('new state for itinerary list:', this.state.itineraryList)
+    // })
 
     this.props.mainSocket.on('update user', (data) => {
       console.log("UPDATING USER!", data);
@@ -71,11 +70,6 @@ export default class App extends React.Component {
 
     this.updateLocationState();
   }
-
-  // componentDidUpdate() {
-  //   console.log(this.state.itineraryList);
-  // }
-
 
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
   setPosition(position) {
@@ -150,12 +144,9 @@ export default class App extends React.Component {
   }
 
   changeRoom (newRoom) {
-    console.log('the new room should be', newRoom)
     this.setState({
       room: newRoom
     });
-     console.log('the new room is now', this.state.room);
-
   }
 
   render() {
