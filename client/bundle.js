@@ -41213,8 +41213,8 @@
 	      var _this2 = this;
 
 	      return _react2.default.createElement(
-	        'button',
-	        { onClick: function onClick(event) {
+	        _reactRouter.Link,
+	        { to: 'groupchatroom', onClick: function onClick(event) {
 	            return _this2.props.changeRoom(_this2.props.itinerary);
 	          } },
 	        _react2.default.createElement(

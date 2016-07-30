@@ -56,7 +56,7 @@ class ItineraryListEntryView extends React.Component {
 
   render () {
     return (
-      <button onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
+      <Link to="groupchatroom" onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
         <div style={itineraryItem} >
           <span style={itineraryDate}>
             { this.props.itinerary.split('_').slice(0, 1) }
@@ -65,7 +65,7 @@ class ItineraryListEntryView extends React.Component {
             { this.props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
           </span>
         </div>
-      </button>
+      </Link>
     );
   }
 }
