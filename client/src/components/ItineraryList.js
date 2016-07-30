@@ -31,7 +31,11 @@ class ItineraryList extends React.Component {
 	constructor (props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
     	
+=======
+    	rooms:
+>>>>>>> a4aa869128c086e61414ce3f72124a7ebf0a4de5
     }
   };
 
@@ -44,14 +48,20 @@ class ItineraryList extends React.Component {
     })
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a4aa869128c086e61414ce3f72124a7ebf0a4de5
   // get list of chat rooms for that user
   getChatRooms() {
     this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
   };
 
+
+
 	
 	render () {
+    this.getChatRooms();
 		return (
 			<div>
 		    <HomeNav header={'Itinerary List'}/>
