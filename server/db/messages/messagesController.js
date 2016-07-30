@@ -1,4 +1,4 @@
- /* eslint-disable */
+/* eslint-disable */
 
 const sequelize = require('sequelize');
 const databaseModels = require('../config.js');
