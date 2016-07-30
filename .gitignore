@@ -37,5 +37,5 @@ jspm_packages
 .node_repl_history
 
 # webpack bundle
-./client/bundle.js
-./client/bundle.js.map
+./client/src/bundle.js
+./client/src/bundle.js.map

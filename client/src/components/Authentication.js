@@ -52,16 +52,11 @@ export class Authentication extends React.Component {
 
   render() {
     const authStyle = {
-      margin: 'auto auto',
-      width: '80%',
-      height: '100%',
-      padding: '7%',
-      textAlign: 'center'
+      'width': '100%',
+      'height': '100%',
+      'text-align': 'center'
     };
 
-    const jumboStyle = {
-      border: '1px solid black',
-    };
 
     // const login = (
     //   <Login
@@ -81,11 +76,11 @@ export class Authentication extends React.Component {
 
     return (
 
-      <div style={authStyle}>
-        <Jumbotron>
+      <div className="loginClass" style={authStyle}>
+        <div>
           <h1> Travel Chums </h1>
           <p> Authentication </p>
-        </Jumbotron>
+        </div>
         <h4><b>Sign in with facebook</b></h4>
         <button>
           <a href="/auth/facebook">

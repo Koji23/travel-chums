@@ -21164,7 +21164,8 @@
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
 	      room: 'none',
 	      header: 'Itinerary List',
-	      leftButton: ''
+	      leftButton: '',
+	      coords: []
 	    };
 	    return _this;
 	  }
@@ -21223,6 +21224,10 @@
 	      console.log('Latitude : ' + crd.latitude);
 	      console.log('Longitude: ' + crd.longitude);
 	      console.log('More or less ' + crd.accuracy + ' meters.');
+	      this.setState({
+	        coords: [crd.latitude, crd.longitude]
+	      });
+	      console.log(this.state);
 	      // const latRound = position.coords.latitude.toFixed(3);
 	      // const lonRound = position.coords.longitude.toFixed(3);
 	      // const location = latRound.toString() + lonRound.toString();
@@ -21339,7 +21344,8 @@
 	            header: this.state.room,
 	            username: this.state.username,
 	            room: this.state.room,
-	            userphoto: this.state.userphoto }),
+	            userphoto: this.state.userphoto,
+	            coords: this.state.coords }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
 	            component: _Authentication.Authentication,
 	            mainSocket: this.props.mainSocket })
@@ -21458,15 +21464,9 @@
 	    key: 'render',
 	    value: function render() {
 	      var authStyle = {
-	        margin: 'auto auto',
-	        width: '80%',
-	        height: '100%',
-	        padding: '7%',
-	        textAlign: 'center'
-	      };
-	
-	      var jumboStyle = {
-	        border: '1px solid black'
+	        'width': '100%',
+	        'height': '100%',
+	        'text-align': 'center'
 	      };
 	
 	      // const login = (
@@ -21487,9 +21487,9 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { style: authStyle },
+	        { className: 'loginClass', style: authStyle },
 	        _react2.default.createElement(
-	          _reactBootstrap.Jumbotron,
+	          'div',
 	          null,
 	          _react2.default.createElement(
 	            'h1',
@@ -41075,7 +41075,7 @@
 	
 	var plusGlyph = {
 		'font-size': '10em',
-		'color': 'orange',
+		'color': '#EB7D6C',
 		'display': 'block',
 		'text-align': 'center'
 	};
@@ -41207,6 +41207,7 @@
 	
 	var itineraryDetails = {
 	  'font': '1.7em "Open Sans", sans-serif',
+	  'font-weight': 'bold',
 	  'color': 'rgb(58, 58, 58)',
 	  'text-align': 'left',
 	  'overflow': 'hidden',
@@ -41215,6 +41216,12 @@
 	
 	var hamburger = {
 	  'float': 'right'
+	};
+	
+	var dateBlock = {
+	  'background-color': 'rgba(183, 183, 183, 0.14)',
+	  'height': '100px',
+	  'width': '100px'
 	};
 	
 	// export const ItineraryListEntryView = (props) => (
@@ -41255,19 +41262,18 @@
 	          'div',
 	          { style: itineraryItem },
 	          _react2.default.createElement(
-	            'span',
-	            { style: itineraryDate },
-	            this.props.itinerary.split('_').slice(0, 1)
+	            'div',
+	            { style: dateBlock },
+	            _react2.default.createElement(
+	              'span',
+	              { style: itineraryDate },
+	              this.props.itinerary.split('_').slice(0, 1)
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            { style: itineraryDetails },
 	            this.props.itinerary.replace('_to_', ' to ').split('_').slice(1)
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_reactBootstrap.Glyphicon, { style: hamburger, glyph: 'menu-hamburger' })
 	          )
 	        )
 	      );
@@ -64216,7 +64222,8 @@
 	    _this.state = {
 	      typingStatus: false,
 	      messages: [],
-	      roomname: 'playhouse'
+	      roomname: 'playhouse',
+	      userIsEnroute: false
 	    };
 	    _this.debouncedDisableTypingStatus = _lodash2.default.debounce(_this.disableTypingStatus, 1000);
 	    return _this;
@@ -64289,11 +64296,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.params.name, leftButton: 'Home' }),
+	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.params.name.split('_')[0], leftButton: 'Home' }),
 	        _react2.default.createElement(
-	          'h1',
+	          'h3',
 	          { style: { color: 'white' } },
-	          'GroupChatRoom'
+	          this.props.params.name.split('_').slice(1).join(' ').toUpperCase()
 	        ),
 	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.route.username, messages: this.state.messages }),
 	        typingStatus,
@@ -81195,7 +81202,8 @@
 		'top': '150px',
 		'margin-bottom': '20px',
 		'margin-left': '40px',
-		'margin-top': '20px'
+		'margin-top': '20px',
+		'text-align': 'center'
 	};
 	
 	var footer = {
@@ -81214,6 +81222,10 @@
 		'font': '2em "Open Sans", sans-serif',
 		'position': 'relative',
 		'top': '15px'
+	};
+	
+	var questions = {
+		'text-align': 'center'
 	};
 	
 	// addItinerary (event) {
@@ -81252,20 +81264,19 @@
 					_react2.default.createElement(_Nav.HomeNav, { header: 'Add New Itinerary' }),
 					_react2.default.createElement(
 						'h1',
-						null,
+						{ style: questions },
 						'where are you?'
 					),
 					_react2.default.createElement('textarea', { ref: 'startCity', style: input1 }),
 					_react2.default.createElement(
 						'h1',
-						null,
+						{ style: questions },
 						'where are you going?'
 					),
-					_react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'retweet' }),
 					_react2.default.createElement('textarea', { ref: 'endCity', style: input1 }),
 					_react2.default.createElement(
 						'h1',
-						null,
+						{ style: questions },
 						'when are you leaving?'
 					),
 					_react2.default.createElement('textarea', { ref: 'date', style: input1 }),

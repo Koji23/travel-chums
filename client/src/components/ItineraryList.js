@@ -30,7 +30,7 @@ var itineraryContainer = {
 
 var plusGlyph = {
 	'font-size': '10em',
-	'color': 'orange',
+	'color': '#EB7D6C',
 	'display':'block',
 	'text-align':'center'
 }
