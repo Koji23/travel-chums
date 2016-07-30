@@ -6,7 +6,6 @@ const chatroomController = require('../db/chatroom/chatroomController.js');
 const userController = require('../db/user/userController.js');
 const messagesController = require('../db/messages/messagesController.js');
 const sequelize = require('../db/config.js');
-const bluebird = require('bluebird');
 
 
 var dummyData = [{roomname: '2016-06-01_madrid_to_barcelona', username: 'admin', message: 'Welcome', createdAt:''},
@@ -62,25 +61,13 @@ module.exports = (socket, io, app) => {
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      var redirectPromise = function(page) {
-          return new Promise(function(resolve, reject) {
-              res.redirect(page, function (err, response) {
-                if (err) {
-                  reject(err);
-                } else {
-                    resolve(res.send(newInfo));
-                }
-              });
-          })
-      };
       // Successful authentication, redirect ho11me.
-      res.redirectPromise('/').then(function(data){
-        // res.send({username:1req.user.displayName, photo:req.user.photos[0].value})
-        console.log("*&^%$%$#@!",data);
-      });
+      console.log('WOoOOOOOOOOOOOHHOOOOOOOOOOOO!!', {username:req.user.displayName, photo:req.user.photos[0].value});
+      res.redirect(`/?userLoggedIn=true&username=${req.user.displayName}&photo=${req.user.photos[0].value}`); 
   });
 
   app.get('/*', (req, res) => {
+    // console.log('%%%', req);
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 
