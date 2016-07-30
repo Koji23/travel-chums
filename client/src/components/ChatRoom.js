@@ -77,7 +77,7 @@ class GroupChatRoom extends React.Component {
         <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
         <form>
-          <fieldset>
+          <fieldset className="submitMessage">
             <img ref="photo" src={this.props.route.userphoto}  className="userPhoto"/>
             <legend style={{color:'white'}}>Send:</legend>
             <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>

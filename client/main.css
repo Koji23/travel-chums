@@ -81,3 +81,9 @@ top: 50%;
 .glyphNav {
 	font-size: 1.5em;
 }
+
+textarea.submitMessage {
+  position: relative;
+  width: 300px;
+  color: blue;
+}
