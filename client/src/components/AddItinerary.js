@@ -64,7 +64,7 @@ class AddItinerary extends React.Component {
 				<h1>where are you going?</h1>
 				<textarea ref="endCity" style={input1}/>
 				<h1>when are you leaving?</h1>
-				<textarea ref="date" style={input1}/>
+				<input type="date" style={input1}/>
 				<div style={footer} onClick={(event) => this.sendItinerary(event)}>
 					<div style={newItinerary}>+ submit new itinerary</div>
 				</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 
 var nav = {
-    'backgroundColor': '#de007b',
+    'backgroundColor': '#0898A1',
     'height': '100px',
     'position': 'relative'
 }

@@ -9,7 +9,7 @@ var footer = {
   'right': '0',
   'bottom': '0',
   'left': '0',
-  'background-color': '#5d5d5d',
+  'background-color': '#0898A1',
   'text-align': 'center'
 }
 
