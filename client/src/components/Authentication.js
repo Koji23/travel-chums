@@ -52,18 +52,11 @@ export class Authentication extends React.Component {
 
   render() {
     const authStyle = {
-      margin: 'auto auto',
-      width: '80%',
-      height: '100%',
-      border: '1px solid black',
-      padding: '7%',
-      textAlign: 'center',
-      background: '#CCC',
+      'width': '100%',
+      'height': '100%',
+      'text-align': 'center'
     };
 
-    const jumboStyle = {
-      border: '1px solid black',
-    };
 
     // const login = (
     //   <Login
@@ -82,11 +75,12 @@ export class Authentication extends React.Component {
     // const pageToRender = !!this.state.login ? login : signup;
 
     return (
-      <div style={authStyle}>
-        <Jumbotron style={jumboStyle}>
-          <h1> Travel Chums </h1>
-          <p> Authentication </p>
-        </Jumbotron>
+
+      <div className="loginClass" style={authStyle}>
+        <div>
+          <h1> TRAVEL CHUMS </h1>
+          <p> Never Travel Alone </p>
+        </div>
         <h4><b>Sign in with facebook</b></h4>
         <button>
           <a href="/auth/facebook">
@@ -94,8 +88,22 @@ export class Authentication extends React.Component {
           </a>
         </button>
       </div>
+      
     );
   }
 }
 
 
+      
+      // <div class="homepage-hero-module">
+      //   <div class="video-container">
+      //       <div class="filter"></div>
+      //       <video autoplay loop class="fillWidth">
+      //           <source src="PATH_TO_MP4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+      //           <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+      //       </video>
+      //       <div class="poster hidden">
+      //           <img src="PATH_TO_JPEG" alt="">
+      //       </div>
+      //   </div>
+      // </div>
