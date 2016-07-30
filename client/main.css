@@ -77,3 +77,7 @@ top: 50%;
 #app {
 	background-color: #E5E5E5;
 }
+
+.glyphNav {
+	font-size: 1.5em;
+}

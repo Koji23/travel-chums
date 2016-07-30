@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HomeNav } from './Nav';
+import {Icon} from './Icon';
+import {Glyphicon} from 'react-bootstrap';
 
 var input1 = {
 	'border': '1px solid black',
@@ -62,6 +64,7 @@ class AddItinerary extends React.Component {
 		    <h1>where are you?</h1>
 				<textarea ref="startCity" style={input1}/>
 				<h1>where are you going?</h1>
+				<Glyphicon glyph="retweet"/>
 				<textarea ref="endCity" style={input1}/>
 				<h1>when are you leaving?</h1>
 				<input type="date" style={input1}/>
