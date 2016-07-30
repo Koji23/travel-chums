@@ -63913,6 +63913,8 @@
 
 	var _Nav = __webpack_require__(634);
 
+	var _reactBootstrap = __webpack_require__(174);
+
 	var _lodash = __webpack_require__(639);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
@@ -63924,6 +63926,23 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable */
+
+	var inputStyle = {
+	  'width': '90%',
+	  'margin-left': '5%',
+	  'border-radius': '7.5px'
+	};
+
+	var roomnameStyle = {
+	  'text-align': 'center'
+	};
+
+	var plusGlyph = {
+	  'font-size': '10em',
+	  'color': '#EB7D6C',
+	  'display': 'block',
+	  'text-align': 'center'
+	};
 
 	var GroupChatRoom = function (_React$Component) {
 	  _inherits(GroupChatRoom, _React$Component);
@@ -64013,7 +64032,7 @@
 	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.params.name.split('_')[0], leftButton: 'Home' }),
 	        _react2.default.createElement(
 	          'h3',
-	          { style: { color: 'white' } },
+	          { style: { color: 'white', 'text-align': 'center' } },
 	          this.props.params.name.split('_').slice(1).join(' ').toUpperCase()
 	        ),
 	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.route.username, messages: this.state.messages }),
@@ -64025,12 +64044,7 @@
 	            'fieldset',
 	            { className: 'submitMessage' },
 	            _react2.default.createElement('img', { ref: 'photo', src: this.props.route.userphoto, className: 'userPhoto' }),
-	            _react2.default.createElement(
-	              'legend',
-	              { style: { color: 'white' } },
-	              'Send:'
-	            ),
-	            _react2.default.createElement('textarea', { ref: 'message', onChange: function onChange() {
+	            _react2.default.createElement('textarea', { ref: 'message', style: inputStyle, onChange: function onChange() {
 	                _this3.sendTypingStatus();
 	              } }),
 	            _react2.default.createElement('br', null),

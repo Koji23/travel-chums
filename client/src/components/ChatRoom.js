@@ -5,8 +5,27 @@ import ReactDOM from 'react-dom';
 import { AddMessage } from './AddMessage';
 import { MessageList } from './MessageList';
 import { HomeNav } from './Nav';
+import { Button } from 'react-bootstrap';
 
 import _ from 'lodash';
+
+var inputStyle = {
+  'width': '90%',
+  'margin-left': '5%',
+  'border-radius': '7.5px'
+}
+
+var roomnameStyle = {
+  'text-align': 'center'
+}
+
+  var plusGlyph = {
+  'font-size': '10em',
+  'color': '#EB7D6C',
+  'display':'block',
+  'text-align':'center'
+}
+
 
 class GroupChatRoom extends React.Component {
   constructor (props) {
@@ -71,15 +90,14 @@ class GroupChatRoom extends React.Component {
     return (
       <div>
         <HomeNav header={this.props.params.name.split('_')[0]} leftButton={'Home'}/>
-        <h3 style={{color:'white'}}>{this.props.params.name.split('_').slice(1).join(' ').toUpperCase()}</h3>
+        <h3 style={{color:'white', 'text-align': 'center'}}>{this.props.params.name.split('_').slice(1).join(' ').toUpperCase()}</h3>
 
         <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
         <form>
           <fieldset className="submitMessage">
             <img ref="photo" src={this.props.route.userphoto}  className="userPhoto"/>
-            <legend style={{color:'white'}}>Send:</legend>
-            <textarea ref='message' onChange={() => {this.sendTypingStatus()}}/><br/>
+            <textarea ref='message' style={inputStyle} onChange={() => {this.sendTypingStatus()}}/><br/>
             <input onClick={(event) => this.sendMessage(event)} type="submit" value="Submit" style={{color:'white'}} />
           </fieldset>
         </form>
