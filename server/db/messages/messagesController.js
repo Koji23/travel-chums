@@ -39,13 +39,18 @@ module.exports = {
       // console.log("??data2??", data2);
 
       data2.forEach(function(messageInstance) {
-        messageData.push({username: messageInstance.dataValues.username, message: messageInstance.dataValues.message})
+        console.log("$$$$$$$$$$$$$$", messageInstance);
+        messageData.push({username: messageInstance.dataValues.username, 
+                          message: messageInstance.dataValues.message,
+                          photo: messageInstance.dataValues.photo,
+                          createdAt: messageInstance.dataValues.createdAt
+                        });
       })
       
       return messageData;
     })
     .then(function(data3) {
-      // console.log("??????", data3);
+      console.log("??????", data3);
       socket.emit('get messages for room', data3);
     })
   }

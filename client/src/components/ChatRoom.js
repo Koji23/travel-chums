@@ -43,7 +43,6 @@ class GroupChatRoom extends React.Component {
       room: this.state.roomname,
       photo: ReactDOM.findDOMNode(this.refs.photo).src
     }
-    console.log('!!!!!!!', messageData);
 
     this.props.route.mainSocket.emit('send message', messageData, this.state.roomname);
   }
@@ -65,12 +64,10 @@ class GroupChatRoom extends React.Component {
   }
 
   getMessages () {
-    // console.log('gettings messages........');
     this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
   }
 
   render () {
-    console.log(this.props)
     let typingStatus = this.state.typingStatus ? <div style={{color:'white'}}>Is Typing...</div> : <div></div>;
     return (
       <div>

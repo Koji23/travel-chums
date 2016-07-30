@@ -9,11 +9,11 @@ export const MessageListEntry = (props) => {
       <li className={props.side === 'L' ? 'bubbleLeft' : 'bubbleRight'}>
         <div >
           {
-            props.message.username + ' '
-            + props.message.message + ' '
-            + Moment(props.message.createdAt).fromNow()
+            props.message.username + ': '
+            + props.message.message
           }
         </div>
+        <div>{Moment(props.message.createdAt).fromNow()}</div>
       </li>
     </div>
   );

@@ -63934,7 +63934,6 @@
 	        room: this.state.roomname,
 	        photo: _reactDom2.default.findDOMNode(this.refs.photo).src
 	      };
-	      console.log('!!!!!!!', messageData);
 	
 	      this.props.route.mainSocket.emit('send message', messageData, this.state.roomname);
 	    }
@@ -63960,7 +63959,6 @@
 	  }, {
 	    key: 'getMessages',
 	    value: function getMessages() {
-	      // console.log('gettings messages........');
 	      this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
 	    }
 	  }, {
@@ -63968,7 +63966,6 @@
 	    value: function render() {
 	      var _this3 = this;
 	
-	      console.log(this.props);
 	      var typingStatus = this.state.typingStatus ? _react2.default.createElement(
 	        'div',
 	        { style: { color: 'white' } },
@@ -64226,7 +64223,12 @@
 	      _react2.default.createElement(
 	        'div',
 	        null,
-	        props.message.username + ' ' + props.message.message + ' ' + (0, _moment2.default)(props.message.createdAt).fromNow()
+	        props.message.username + ': ' + props.message.message
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        (0, _moment2.default)(props.message.createdAt).fromNow()
 	      )
 	    )
 	  );
