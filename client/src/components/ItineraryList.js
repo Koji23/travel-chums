@@ -2,6 +2,7 @@ import React from 'react';
 import { ItineraryListEntryView } from './ItineraryListEntryView';
 import { HomeNav } from './Nav';
 import { Link } from 'react-router';
+import {Glyphicon} from 'react-bootstrap';
 
 var footer = {
   'position': 'absolute',
@@ -24,6 +25,13 @@ var itineraryContainer = {
   'height': '530',
   'display': 'flex',
   'flex-direction': 'column'
+}
+
+var plusGlyph = {
+	'font-size': '10em',
+	'color': 'orange',
+	'display':'block',
+	'text-align':'center'
 }
 
 class ItineraryList extends React.Component {
@@ -64,11 +72,11 @@ class ItineraryList extends React.Component {
 					))}
 					
 				</div>
-				<Link to={'/additinerary'}>
-					<div style={footer} >
-						<div style={newItinerary} >+ add new itinerary</div>
-					</div>
-				</Link>
+				<div>
+					<Link to={'/additinerary'}>
+						<Glyphicon style={plusGlyph} glyph="plus-sign"/>
+					</Link>
+				</div>
 			</div>
 		);	
 	}

@@ -1,22 +1,21 @@
 import React from 'react';
 import Moment from 'moment';
 import { Link } from 'react-router';
+import {Glyphicon} from 'react-bootstrap';
 
 
 import RaisedButton from 'material-ui/RaisedButton';
 
 var itineraryItem = {
-  'height': '80px',  
+  'height': '100px',
   'position': 'relative',
-  'border-bottom-width': '1px',
-  'border-bottom-style': 'solid',
-  'background-color': 'rgba(255, 255, 255, 0.22)',
-  'border-radius': '7px',
-  'margin': '2px',
   'display': 'flex',
   'align-items': 'center',
   'justify-content': 'flex-start',
-
+  'background-color': 'white',
+  'margin-bottom': '10px',
+  'width': '95%',
+  'margin-left': '2.5%'
 }
 
 var itineraryDate = {
@@ -28,10 +27,14 @@ var itineraryDate = {
 
 var itineraryDetails = {
   'font': '1.7em "Open Sans", sans-serif',
-  'color': 'white',
+  'color': 'rgb(58, 58, 58)',
   'text-align': 'left',
   'overflow': 'hidden',
   'text-overflow': 'ellipses'
+}
+
+var hamburger = {
+  'float': 'right'
 }
 
 
@@ -67,6 +70,9 @@ class ItineraryListEntryView extends React.Component {
           <span style={itineraryDetails}>
             { this.props.itinerary.replace('_to_', ' to ').split('_').slice(1) }
           </span>
+          <div>
+            <Glyphicon style={hamburger} glyph="menu-hamburger"/>
+          </div>
         </div>
       </Link>
     );
