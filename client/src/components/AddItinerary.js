@@ -13,7 +13,8 @@ var input1 = {
 	'top': '150px',
 	'margin-bottom': '20px',
 	'margin-left': '40px',
-	'margin-top': '20px'
+	'margin-top': '20px',
+	'text-align': 'center'
 }
 
 var footer = {
@@ -32,6 +33,10 @@ var newItinerary = {
 	'font': '2em "Open Sans", sans-serif',
 	'position': 'relative',
 	'top': '15px'
+}
+
+var questions = {
+	'text-align': 'center'
 }
 
 // addItinerary (event) {
@@ -60,12 +65,11 @@ class AddItinerary extends React.Component {
 		return (
 			<div>
 		    <HomeNav header={'Add New Itinerary'}/>
-		    <h1>where are you?</h1>
+		    <h1 style={questions}>where are you?</h1>
 				<textarea ref="startCity" style={input1}/>
-				<h1>where are you going?</h1>
-				<Glyphicon glyph="retweet"/>
+				<h1 style={questions}>where are you going?</h1>
 				<textarea ref="endCity" style={input1}/>
-				<h1>when are you leaving?</h1>
+				<h1 style={questions}>when are you leaving?</h1>
 				<textarea ref="date" style={input1}/>
 					<div style={footer} onClick={(event) => this.sendItinerary(event)}>
 
