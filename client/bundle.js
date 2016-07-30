@@ -63996,11 +63996,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.params.name, leftButton: 'Home' }),
+	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.params.name.split('_')[0], leftButton: 'Home' }),
 	        _react2.default.createElement(
-	          'h1',
+	          'h3',
 	          { style: { color: 'white' } },
-	          'GroupChatRoom'
+	          this.props.params.name.split('_').slice(1).join(' ').toUpperCase()
 	        ),
 	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.route.username, messages: this.state.messages }),
 	        typingStatus,

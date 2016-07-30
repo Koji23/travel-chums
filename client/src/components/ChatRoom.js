@@ -69,8 +69,8 @@ class GroupChatRoom extends React.Component {
     let typingStatus = this.state.typingStatus ? <div style={{color:'white'}}>Is Typing...</div> : <div></div>;
     return (
       <div>
-        <HomeNav header={this.props.params.name} leftButton={'Home'}/>
-        <h1 style={{color:'white'}}>GroupChatRoom</h1>
+        <HomeNav header={this.props.params.name.split('_')[0]} leftButton={'Home'}/>
+        <h3 style={{color:'white'}}>{this.props.params.name.split('_').slice(1).join(' ').toUpperCase()}</h3>
 
         <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
