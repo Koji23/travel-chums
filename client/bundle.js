@@ -64009,7 +64009,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'fieldset',
-	            null,
+	            { className: 'submitMessage' },
 	            _react2.default.createElement('img', { ref: 'photo', src: this.props.route.userphoto, className: 'userPhoto' }),
 	            _react2.default.createElement(
 	              'legend',
@@ -64238,7 +64238,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    props.side === "L" ? _react2.default.createElement('img', { className: 'bubbleImageLeft', src: 'http://www.cienciapr.org/sites/cienciapr.org/files/styles/article-page-node/public/erizo-rubio_1.jpg?itok=PIfVGyo2' }) : _react2.default.createElement('div', null),
+	    props.side === "L" ? _react2.default.createElement('img', { className: 'bubbleImageLeft', src: props.message.photo }) : _react2.default.createElement('div', null),
 	    _react2.default.createElement(
 	      'li',
 	      { className: props.side === 'L' ? 'bubbleLeft' : 'bubbleRight' },
