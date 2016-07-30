@@ -26,9 +26,7 @@ module.exports = {
     var messageData = [];
     return databaseModels.PublicRoomsTest.findOne({where: {roomName: roomname}})
     .then(function(data) {
-      if(data){
-      return databaseModels.PublicMessagesTest.findAll({where: {publicRoomsTestId: data.dataValues.id}})      
-      }
+      return databaseModels.PublicMessagesTest.findAll({where: {publicRoomsTestId: data.dataValues.id}})     
     })
     .then(function(data2){
       

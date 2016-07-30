@@ -63863,7 +63863,8 @@
 	        username: this.props.route.username,
 	        message: _reactDom2.default.findDOMNode(this.refs.message).value,
 	        room: 'default',
-	        createAt: new Date()
+	        createAt: new Date(),
+	        photo: ''
 	      };
 	      console.log('!!!!!!!', messageData);
 

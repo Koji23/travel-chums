@@ -41,7 +41,8 @@ class GroupChatRoom extends React.Component {
       username: this.props.route.username,
       message: ReactDOM.findDOMNode(this.refs.message).value,
       room: 'default',
-      createAt: new Date()
+      createAt: new Date(),
+      photo: ''
     }
     console.log('!!!!!!!', messageData);
 
