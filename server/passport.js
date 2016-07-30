@@ -10,6 +10,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
+  db.UserTest.findOne({where: {facebookId: id, username: name, displayName: name}})
+    .then(user => {
+      done(null, user);
+    })
+
   // DATABASE.findOne({where: {id????: id}}).then(function(user){
   // 	done(user);
   // });
@@ -41,6 +46,9 @@ passport.use(new FacebookStrategy(
     const id = profile.id;
     const name = profile.displayName;
     const photos = profile.photos[0].value;
+    console.log('photos: ', photos);
     userController.createNewUser(null, id, name, photos);
+    console.log('Auth Done!');
+    cb(null, profile);
   }
 ));
