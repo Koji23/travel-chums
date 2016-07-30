@@ -16,6 +16,7 @@ export const MessageList = (props) => {
     <div style={{border: '1px solid black',fontWeight: 'bold', backgroundColor: '#CCC', paddingTop: '10px', overflow:"scroll", height:"400px"}} >
       <ul fill>
         {props.messages.map((message, index) => {
+          console.log('??', message);
           if(message.username === props.username) {
             return <MessageListEntry side="R" message={message} key={index} isUser={true}/>;     
           } else {
