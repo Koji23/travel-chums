@@ -7,11 +7,11 @@ const databaseModels = require('../config.js');
 module.exports = {
   createMessage: (messageData, socket) => {
     // console.log('user', messageData.username);
-    // console.log('room', messageData.room);
+    console.log('room', messageData.room);
     console.log('***', messageData);
     return databaseModels.UserTest.findOne({where: {username: messageData.username}})
     .then(function(data) {
-        // console.log('username id-------------------',data.id);
+        console.log('username id-------------------',data.id);
         return databaseModels.PublicRoomsTest.findOne({where: {roomName: messageData.room}})
         .then(function(data2) {
             console.log('room id------------%%-----', data2);

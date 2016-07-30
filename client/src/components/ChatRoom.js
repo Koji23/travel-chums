@@ -38,7 +38,7 @@ class GroupChatRoom extends React.Component {
     let messageData = {
       username: this.props.route.username,
       message: ReactDOM.findDOMNode(this.refs.message).value,
-      room: this.state.roomname,
+      room: this.props.params.name,
       photo: ReactDOM.findDOMNode(this.refs.photo).src
     }
     console.log('message being sent!!!!!!!!!!')
