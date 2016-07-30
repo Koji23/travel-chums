@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HomeNav } from './Nav';
-import {Icon} from './Icon';
 import {Glyphicon} from 'react-bootstrap';
 import {Link} from 'react-router';
 
