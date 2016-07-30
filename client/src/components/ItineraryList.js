@@ -22,9 +22,10 @@ var newItinerary = {
 }
 
 var itineraryContainer = {
-  'height': '530',
+  'height': '470',
   'display': 'flex',
-  'flex-direction': 'column'
+  'flex-direction': 'column',
+	'overflow': 'scroll'
 }
 
 var plusGlyph = {
@@ -33,6 +34,7 @@ var plusGlyph = {
 	'display':'block',
 	'text-align':'center'
 }
+
 
 class ItineraryList extends React.Component {
 

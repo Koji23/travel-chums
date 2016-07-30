@@ -21502,7 +21502,7 @@
 	          _react2.default.createElement(
 	            'h1',
 	            null,
-	            ' Crumbs '
+	            ' Travel Chums '
 	          ),
 	          _react2.default.createElement(
 	            'p',
@@ -41062,9 +41062,10 @@
 	};
 	
 	var itineraryContainer = {
-		'height': '530',
+		'height': '470',
 		'display': 'flex',
-		'flex-direction': 'column'
+		'flex-direction': 'column',
+		'overflow': 'scroll'
 	};
 	
 	var plusGlyph = {
@@ -80957,7 +80958,7 @@
 			key: 'sendItinerary',
 			value: function sendItinerary(event) {
 				event.preventDefault();
-				var itineraryData = _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value;
+				var itineraryData = _reactDom2.default.findDOMNode(this.refs.date).value.toUpperCase() + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value.toUpperCase() + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value.toUpperCase();
 				this.props.route.mainSocket.emit('send itinerary', { itinerary: itineraryData, username: this.props.route.username });
 			}
 		}, {
