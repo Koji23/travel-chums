@@ -53,7 +53,6 @@ class AddItinerary extends React.Component {
 			ReactDOM.findDOMNode(this.refs.date).value
 			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value
 			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value;
-		console.log(this.props.route.mainSocket)
 		this.props.route.mainSocket.emit('send itinerary', {itinerary: itineraryData, username: this.props.route.username});
 	}
 
@@ -67,7 +66,7 @@ class AddItinerary extends React.Component {
 				<Glyphicon glyph="retweet"/>
 				<textarea ref="endCity" style={input1}/>
 				<h1>when are you leaving?</h1>
-				<input type="date" style={input1}/>
+				<textarea ref="date" style={input1}/>
 				<div style={footer} onClick={(event) => this.sendItinerary(event)}>
 					<div style={newItinerary}>+ submit new itinerary</div>
 				</div>
@@ -79,4 +78,4 @@ class AddItinerary extends React.Component {
 
 export {AddItinerary};
 
-				
+			// <input type="date" style={input1}/>

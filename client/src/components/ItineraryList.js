@@ -47,14 +47,14 @@ class ItineraryList extends React.Component {
 
   // get list of chat rooms for that user
   getChatRooms() {
-    this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
+    this.props.route.mainSocket.emit('get chatrooms', {username: this.props.route.username})
   };
 
 
 
 	
 	render () {
-    console.log('is array?', Array.isArray(this.state.rooms), 'original state', this.props.route.itineraryList);
+    // console.log('original state', this.props.route);
 		return (
 			<div>
 		    <HomeNav header={'Itinerary List'}/>

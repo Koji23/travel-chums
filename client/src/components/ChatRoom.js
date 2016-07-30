@@ -26,12 +26,10 @@ class GroupChatRoom extends React.Component {
     }); 
 
     this.props.route.mainSocket.on('get messages for room', (messages) => {
-      console.log('!!!!!!!!!!!', messages);
       this.setState({
         messages: messages
       });
-    });
-    
+    });    
     this.getMessages();
   }
 
@@ -43,8 +41,8 @@ class GroupChatRoom extends React.Component {
       room: this.state.roomname,
       photo: ReactDOM.findDOMNode(this.refs.photo).src
     }
-
-    this.props.route.mainSocket.emit('send message', messageData, this.state.roomname);
+    console.log('message being sent!!!!!!!!!!')
+    this.props.route.mainSocket.emit('send message', messageData, this.props.params.name);
   }
 
   sendTypingStatus () {
@@ -64,7 +62,7 @@ class GroupChatRoom extends React.Component {
   }
 
   getMessages () {
-    this.props.route.mainSocket.emit('get messages for room', this.state.roomname);
+    this.props.route.mainSocket.emit('get messages for room', this.props.params.name);
   }
 
   render () {
