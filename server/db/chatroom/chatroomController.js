@@ -17,9 +17,7 @@ module.exports = {
 
   // takes in array of lat and long and will write a key (lat long array) value (empty array for messages) to db
   createChatRoom: (socket) => {
-    db.PublicRoomsTest.findOrCreate({where: {
-      roomName: socket.itinerary
-    }}).then(function(data) {
+    db.PublicRoomsTest.findOrCreate({where: { roomName: socket.itinerary}}).then(function(data) {
       db.UserTest.findOrCreate({where: {username: socket.username}}).then(function(data2) {
         db.UsersRoomsTest.findOrCreate({where: {roomId: data[0].dataValues.id, userId: data2[0].dataValues.id}})
       })

@@ -40,10 +40,9 @@ class ItineraryList extends React.Component {
 
 	
 	render () {
-		// console.log(this.props.route.itineraryList);
 		return (
 			<div>
-		    <HomeNav/>
+		    <HomeNav header={'Itinerary List'}/>
 				<div style={itineraryContainer}>
 				{this.props.route.itineraryList.map((itinerary) => (
 					<ItineraryListEntryView changeRoom={this.props.route.changeRoom} itinerary={ itinerary } />

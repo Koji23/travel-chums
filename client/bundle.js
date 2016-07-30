@@ -21328,6 +21328,7 @@
 	            onEnter: this.requireAuth.bind(this),
 	            component: _ChatRoom.GroupChatRoom,
 	            mainSocket: this.props.mainSocket,
+	            header: this.state.room,
 	            username: this.state.username }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
 	            component: _Authentication.Authentication,
@@ -41073,11 +41074,10 @@
 			value: function render() {
 				var _this2 = this;
 
-				// console.log(this.props.route.itineraryList);
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav.HomeNav, null),
+					_react2.default.createElement(_Nav.HomeNav, { header: 'Itinerary List' }),
 					_react2.default.createElement(
 						'div',
 						{ style: itineraryContainer },
@@ -64045,7 +64045,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.HomeNav = undefined;
 
@@ -64058,75 +64058,46 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var nav = {
-	    'backgroundColor': '#de007b',
-	    'height': '100px',
-	    'position': 'relative'
+	  'backgroundColor': '#de007b',
+	  'height': '100px',
+	  'position': 'relative'
 	};
 
 	var header = {
-	    'textAlign': 'center',
-	    'position': 'relative',
-	    'font': '2em "Open Sans", sans-serif',
-	    'color': 'white',
-	    'top': '35px'
+	  'textAlign': 'center',
+	  'position': 'relative',
+	  'font': '2em "Open Sans", sans-serif',
+	  'color': 'white',
+	  'top': '35px'
 	};
 
 	var leftButton = {
-	    'textAlign': 'left',
-	    'left': '10px',
-	    'position': 'absolute',
-	    'font': '1.3em "Open Sans", sans-serif',
-	    'color': 'white',
-	    'top': '35px'
+	  'textAlign': 'left',
+	  'left': '10px',
+	  'position': 'absolute',
+	  'font': '1.3em "Open Sans", sans-serif',
+	  'color': 'white',
+	  'top': '35px'
 	};
 
 	var HomeNav = function HomeNav(props) {
-	    return _react2.default.createElement(
-	        'nav',
-	        { style: nav },
-	        _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/' },
-	            'itineraryList'
-	        ),
-	        _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'addItinerary' },
-	            'addItinerary'
-	        ),
-	        _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'groupchatroom' },
-	            'groupChatRoom'
-	        ),
-	        _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'login' },
-	            'Login'
-	        )
-	    );
+	  return _react2.default.createElement(
+	    'nav',
+	    { style: nav },
+	    _react2.default.createElement(
+	      'div',
+	      { style: header },
+	      props.header
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/', style: leftButton },
+	      'Home'
+	    )
+	  );
 	};
 
-	// const AddItineraryNav = (props) => {
-	//     return (
-	//         <nav >
-	//             <Link to="/">itineraryList</Link>
-	//             <Link to="addItinerary">addItinerary</Link>
-	//             <Link to="groupChat">groupChatRoom</Link>
-	//         </nav>
-	//     )
-	// }
-
 	exports.HomeNav = HomeNav;
-
-	// <div style={header}>{ props.header }</div>
-	// <div style={nav} >
-	//     <div style={leftButton} onClick={() => {
-	//         if (props.leftButton === 'Home') {
-	//             props.changePageToRender('itineraryList')
-	//         }
-	//     }}> { props.leftButton }</div>
-	// </div>
 
 /***/ },
 /* 638 */
@@ -64255,7 +64226,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Nav.HomeNav, null),
+	        _react2.default.createElement(_Nav.HomeNav, { header: this.props.route.header, leftButton: 'Home' }),
 	        _react2.default.createElement(
 	          'h1',
 	          { style: { color: 'white' } },
@@ -81149,9 +81120,9 @@
 		'width': '320px',
 		'height': '40px',
 		'top': '150px',
-		'margin-bottom': '70px',
+		'margin-bottom': '20px',
 		'margin-left': '40px',
-		'margin-top': '60px'
+		'margin-top': '20px'
 	};
 
 	var footer = {
@@ -81194,11 +81165,9 @@
 			key: 'sendItinerary',
 			value: function sendItinerary(event) {
 				event.preventDefault();
-				var itineraryData = {
-					itinerary: _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value
-				};
+				var itineraryData = _reactDom2.default.findDOMNode(this.refs.date).value + '_' + _reactDom2.default.findDOMNode(this.refs.startCity).value + '_to_' + _reactDom2.default.findDOMNode(this.refs.endCity).value;
 				console.log(this.props.route.mainSocket);
-				this.props.route.mainSocket.emit('send itinerary', { itinerary: '2016-07-09_jeremysplayhouse_to_neverland', username: this.props.route.username });
+				this.props.route.mainSocket.emit('send itinerary', { itinerary: itineraryData, username: this.props.route.username });
 			}
 		}, {
 			key: 'render',
@@ -81208,9 +81177,24 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav.HomeNav, null),
+					_react2.default.createElement(_Nav.HomeNav, { header: 'Add New Itinerary' }),
+					_react2.default.createElement(
+						'h1',
+						null,
+						'where are you?'
+					),
 					_react2.default.createElement('textarea', { ref: 'startCity', style: input1 }),
+					_react2.default.createElement(
+						'h1',
+						null,
+						'where are you going?'
+					),
 					_react2.default.createElement('textarea', { ref: 'endCity', style: input1 }),
+					_react2.default.createElement(
+						'h1',
+						null,
+						'when are you leaving?'
+					),
 					_react2.default.createElement('textarea', { ref: 'date', style: input1 }),
 					_react2.default.createElement(
 						'div',

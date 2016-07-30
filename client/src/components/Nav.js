@@ -25,34 +25,14 @@ var leftButton = {
 }
 
 const HomeNav = (props) => {
-    return (
-        <nav style={nav}>
-            <Link to="/">itineraryList</Link>
-            <Link to="addItinerary">addItinerary</Link>
-            <Link to="groupchatroom">groupChatRoom</Link>
-            <Link to="login">Login</Link>
-        </nav>
-    )
+  return (
+    <nav style={nav}>
+      <div style={header}>{ props.header }</div>
+      <Link to="/" style={leftButton}>Home</Link>
+    </nav>
+  )
 }
 
-// const AddItineraryNav = (props) => {
-//     return (
-//         <nav >
-//             <Link to="/">itineraryList</Link>
-//             <Link to="addItinerary">addItinerary</Link>
-//             <Link to="groupChat">groupChatRoom</Link>
-//         </nav>
-//     )
-// }
 
 export {HomeNav}
-
-            // <div style={header}>{ props.header }</div>
-    // <div style={nav} >
-    //     <div style={leftButton} onClick={() => {
-    //         if (props.leftButton === 'Home') {
-    //             props.changePageToRender('itineraryList')
-    //         }
-    //     }}> { props.leftButton }</div>
-    // </div>
 
