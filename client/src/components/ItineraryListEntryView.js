@@ -27,6 +27,7 @@ var itineraryDate = {
 
 var itineraryDetails = {
   'font': '1.7em "Open Sans", sans-serif',
+  'font-weight': 'bold',
   'color': 'rgb(58, 58, 58)',
   'text-align': 'left',
   'overflow': 'hidden',
