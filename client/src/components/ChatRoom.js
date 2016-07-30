@@ -14,7 +14,8 @@ class GroupChatRoom extends React.Component {
     this.state = {
       typingStatus: false,
       messages: [],
-      roomname: 'playhouse'
+      roomname: 'playhouse',
+      userIsEnroute: false
     }
     this.debouncedDisableTypingStatus = _.debounce(this.disableTypingStatus, 1000);
   }

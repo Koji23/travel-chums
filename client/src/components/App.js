@@ -27,7 +27,8 @@ export default class App extends React.Component {
       itineraryList: ['2016-06-01_madrid_to_barcelona','2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
       room: 'none',
       header: 'Itinerary List',
-      leftButton: ''
+      leftButton: '',
+      coords: []
     };
   }
 
@@ -79,6 +80,10 @@ export default class App extends React.Component {
     console.log('Latitude : ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
     console.log('More or less ' + crd.accuracy + ' meters.');
+    this.setState({
+      coords: [crd.latitude, crd.longitude]
+    })
+    console.log(this.state);
     // const latRound = position.coords.latitude.toFixed(3);
     // const lonRound = position.coords.longitude.toFixed(3);
     // const location = latRound.toString() + lonRound.toString();
@@ -173,7 +178,8 @@ export default class App extends React.Component {
             header={this.state.room} 
             username={this.state.username}
             room={this.state.room}
-            userphoto={this.state.userphoto}></Route>
+            userphoto={this.state.userphoto}
+            coords={this.state.coords}></Route>
           <Route path="login" 
             component={Authentication} 
             mainSocket={this.props.mainSocket}></Route>

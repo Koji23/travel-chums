@@ -21164,7 +21164,8 @@
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
 	      room: 'none',
 	      header: 'Itinerary List',
-	      leftButton: ''
+	      leftButton: '',
+	      coords: []
 	    };
 	    return _this;
 	  }
@@ -21223,6 +21224,10 @@
 	      console.log('Latitude : ' + crd.latitude);
 	      console.log('Longitude: ' + crd.longitude);
 	      console.log('More or less ' + crd.accuracy + ' meters.');
+	      this.setState({
+	        coords: [crd.latitude, crd.longitude]
+	      });
+	      console.log(this.state);
 	      // const latRound = position.coords.latitude.toFixed(3);
 	      // const lonRound = position.coords.longitude.toFixed(3);
 	      // const location = latRound.toString() + lonRound.toString();
@@ -21339,7 +21344,8 @@
 	            header: this.state.room,
 	            username: this.state.username,
 	            room: this.state.room,
-	            userphoto: this.state.userphoto }),
+	            userphoto: this.state.userphoto,
+	            coords: this.state.coords }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
 	            component: _Authentication.Authentication,
 	            mainSocket: this.props.mainSocket })
@@ -63928,7 +63934,8 @@
 	    _this.state = {
 	      typingStatus: false,
 	      messages: [],
-	      roomname: 'playhouse'
+	      roomname: 'playhouse',
+	      userIsEnroute: false
 	    };
 	    _this.debouncedDisableTypingStatus = _lodash2.default.debounce(_this.disableTypingStatus, 1000);
 	    return _this;
