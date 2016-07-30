@@ -39,7 +39,7 @@ const db = require('../config.js');
 
 module.exports = {
   
-  createNewUser: (socket, id, name) => {
+  createNewUser: (socket, id, name, photo) => {
     db.UserTest.findOrCreate({where: {facebookId: id, username: name, displayName: name}})
     .then(function(user) {
       console.log('USER------------------------------', user);

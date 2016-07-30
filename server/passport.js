@@ -41,6 +41,6 @@ passport.use(new FacebookStrategy(
     const id = profile.id;
     const name = profile.displayName;
     const photos = profile.photos[0].value;
-    userController.createNewUser(null, id, name);
+    userController.createNewUser(null, id, name, photos);
   }
 ));
