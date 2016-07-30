@@ -31,18 +31,18 @@ class ItineraryList extends React.Component {
 	constructor (props) {
     super(props);
     this.state = {
-
-
+    	rooms: []
     }
   };
 
   componentDidMount() {
-    this.props.mainSocket.on('send rooms to front end', (rooms) => {
+    this.props.route.mainSocket.on('send rooms to front end', (rooms) => {
       this.setState({
-        itineraryList: rooms
-      })
-      // console.log('new state for itinerary list:', this.state.itineraryList)
-    })
+        rooms: rooms
+      });
+    });
+
+    this.getChatRooms();
   }
 
   // get list of chat rooms for that user
@@ -54,14 +54,16 @@ class ItineraryList extends React.Component {
 
 	
 	render () {
-    this.getChatRooms();
+    console.log('is array?', Array.isArray(this.state.rooms), 'original state', this.props.route.itineraryList);
 		return (
 			<div>
 		    <HomeNav header={'Itinerary List'}/>
 				<div style={itineraryContainer}>
-				{this.props.route.itineraryList.map((itinerary) => (
-					<ItineraryListEntryView changeRoom={this.props.route.changeRoom} itinerary={ itinerary } />
-				))}
+
+					{this.state.rooms.map((itinerary) => (
+						<ItineraryListEntryView changeRoom={this.props.route.changeRoom} itinerary={ itinerary } />
+					))}
+					
 				</div>
 				<Link to={'/additinerary'}>
 					<div style={footer} >
@@ -74,4 +76,3 @@ class ItineraryList extends React.Component {
 }
 
 export {ItineraryList};
-

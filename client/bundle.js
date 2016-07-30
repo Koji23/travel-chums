@@ -41075,7 +41075,9 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItineraryList).call(this, props));
 	
-	    _this.state = {};
+	    _this.state = {
+	      rooms: []
+	    };
 	    return _this;
 	  }
 	
@@ -41084,12 +41086,13 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
-	      this.props.mainSocket.on('send rooms to front end', function (rooms) {
+	      this.props.route.mainSocket.on('send rooms to front end', function (rooms) {
 	        _this2.setState({
-	          itineraryList: rooms
+	          rooms: rooms
 	        });
-	        // console.log('new state for itinerary list:', this.state.itineraryList)
 	      });
+	
+	      this.getChatRooms();
 	    }
 	
 	    // get list of chat rooms for that user
@@ -41104,7 +41107,7 @@
 	    value: function render() {
 	      var _this3 = this;
 	
-	      this.getChatRooms();
+	      console.log('is array?', Array.isArray(this.state.rooms), 'original state', this.props.route.itineraryList);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -41112,7 +41115,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { style: itineraryContainer },
-	          this.props.route.itineraryList.map(function (itinerary) {
+	          this.state.rooms.map(function (itinerary) {
 	            return _react2.default.createElement(_ItineraryListEntryView.ItineraryListEntryView, { changeRoom: _this3.props.route.changeRoom, itinerary: itinerary });
 	          })
 	        ),
