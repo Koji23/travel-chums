@@ -50,9 +50,9 @@ class AddItinerary extends React.Component {
 	sendItinerary (event) {
 		event.preventDefault();
 		let itineraryData = 
-			ReactDOM.findDOMNode(this.refs.date).value
-			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value
-			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value;
+			ReactDOM.findDOMNode(this.refs.date).value.toUpperCase()
+			+ '_' + ReactDOM.findDOMNode(this.refs.startCity).value.toUpperCase()
+			+ '_to_' + ReactDOM.findDOMNode(this.refs.endCity).value.toUpperCase();
 		this.props.route.mainSocket.emit('send itinerary', {itinerary: itineraryData, username: this.props.route.username});
 	}
 

@@ -84,7 +84,7 @@ export class Authentication extends React.Component {
     return (
       <div style={authStyle}>
         <Jumbotron style={jumboStyle}>
-          <h1> Crumbs </h1>
+          <h1> Travel Chums </h1>
           <p> Authentication </p>
         </Jumbotron>
         <h4><b>Sign in with facebook</b></h4>
