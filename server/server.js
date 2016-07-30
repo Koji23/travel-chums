@@ -14,7 +14,7 @@ middleware(app);
 
 // // Invoke routers function on app to provide access to all routes defined.
 const routers = require('./serverhelpers/routes.js');
-io.on('connection', (socket) => routers(socket, io, express, app));
+io.on('connection', (socket) => routers(socket, io, app));
 
 // App now listening on port 3000.
 server.listen(3000, (err) => {
