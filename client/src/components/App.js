@@ -57,7 +57,7 @@ export default class App extends React.Component {
       this.setState({
         itineraryList: rooms
       })
-      console.log('new state for itinerary list:', this.state.itineraryList)
+      // console.log('new state for itinerary list:', this.state.itineraryList)
     })
 
     this.props.mainSocket.on('update user', (data) => {
@@ -71,6 +71,10 @@ export default class App extends React.Component {
 
     this.updateLocationState();
   }
+
+  // componentDidUpdate() {
+  //   console.log(this.state.itineraryList);
+  // }
 
 
   //will continulally update our location state with our new position returned form navigator.geolocation and check if we are in chat room
@@ -171,7 +175,7 @@ export default class App extends React.Component {
             component={AddItinerary}
             mainSocket={this.props.mainSocket} 
             username={this.state.username}></Route>
-          <Route path="groupchatroom" 
+          <Route path="groupchatroom/:name" 
             onEnter={this.requireAuth.bind(this)} 
             component={GroupChatRoom} 
             mainSocket={this.props.mainSocket}

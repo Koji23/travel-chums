@@ -51,13 +51,16 @@ class ItineraryListEntryView extends React.Component {
   
   constructor (props) {
     super(props);
-    console.log('entry list of props', props);
+    state: {
+      
+    }
   };
+
 
   render () {
     return (
-      <Link to="groupchatroom" onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
-        <div style={itineraryItem} >
+      <Link to={`groupchatroom/${this.props.itinerary}`} onClick={(event) => this.props.changeRoom(this.props.itinerary)}>
+        <div style={itineraryItem}>
           <span style={itineraryDate}>
             { this.props.itinerary.split('_').slice(0, 1) }
           </span>

@@ -30,16 +30,38 @@ class ItineraryList extends React.Component {
 
 	constructor (props) {
     super(props);
-    console.log('first set of props', props.route.changeRoom)
+    this.state = {
+<<<<<<< HEAD
+    	
+=======
+    	rooms:
+>>>>>>> a4aa869128c086e61414ce3f72124a7ebf0a4de5
+    }
   };
 
+  componentDidMount() {
+    this.props.mainSocket.on('send rooms to front end', (rooms) => {
+      this.setState({
+        itineraryList: rooms
+      })
+      // console.log('new state for itinerary list:', this.state.itineraryList)
+    })
+  }
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> a4aa869128c086e61414ce3f72124a7ebf0a4de5
   // get list of chat rooms for that user
   getChatRooms() {
     this.props.route.mainSocket.emit('get chatrooms', {username: 'cookieMonster'})
-  }
+  };
+
+
 
 	
 	render () {
+    this.getChatRooms();
 		return (
 			<div>
 		    <HomeNav header={'Itinerary List'}/>
