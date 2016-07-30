@@ -21162,7 +21162,7 @@
 	      username: 'cookieMonster',
 	      userphoto: 'http://i.imgur.com/2muFGLB.jpg',
 	      itineraryList: ['2016-06-01_madrid_to_barcelona', '2016-08-27_sanfrancisco_to_losangeles', '2016-09-30_prague_to_berlin'],
-	      room: 'JTs Fun Emporium',
+	      room: 'none',
 	      header: 'Itinerary List',
 	      leftButton: ''
 	    };
@@ -21306,10 +21306,11 @@
 	  }, {
 	    key: 'changeRoom',
 	    value: function changeRoom(newRoom) {
+	      console.log('the new room should be', newRoom);
 	      this.setState({
 	        room: newRoom
 	      });
-	      console.log('the new room is', this.state.room);
+	      console.log('the new room is now', this.state.room);
 	    }
 	  }, {
 	    key: 'render',
@@ -21338,6 +21339,7 @@
 	            component: _ChatRoom.GroupChatRoom,
 	            mainSocket: this.props.mainSocket,
 	            username: this.state.username,
+	            room: this.state.room,
 	            userphoto: this.state.userphoto }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'login',
 	            component: _Authentication.Authentication,
@@ -41211,8 +41213,8 @@
 	      var _this2 = this;
 
 	      return _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: "groupchatroom", onClick: function onClick(event) {
+	        'button',
+	        { onClick: function onClick(event) {
 	            return _this2.props.changeRoom(_this2.props.itinerary);
 	          } },
 	        _react2.default.createElement(
@@ -63988,7 +63990,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          { style: { color: 'white' } },
-	          'GroupChatRoom'
+	          this.props.route.room
 	        ),
 	        _react2.default.createElement(_MessageList.MessageList, { username: this.props.route.username, messages: this.state.messages }),
 	        typingStatus,

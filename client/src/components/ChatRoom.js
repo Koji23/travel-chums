@@ -74,7 +74,7 @@ class GroupChatRoom extends React.Component {
     return (
       <div>
         <HomeNav />
-        <h1 style={{color:'white'}}>GroupChatRoom</h1>
+        <h1 style={{color:'white'}}>{this.props.route.room}</h1>
         <MessageList username={this.props.route.username} messages={this.state.messages} />
         {typingStatus}
         <form>
